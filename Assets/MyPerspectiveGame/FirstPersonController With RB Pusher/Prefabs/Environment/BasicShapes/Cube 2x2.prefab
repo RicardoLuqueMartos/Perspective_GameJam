@@ -26,7 +26,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7097708214444366774, guid: 46d7113f8d083f649ad998abeed323f7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7097708214444366774, guid: 46d7113f8d083f649ad998abeed323f7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -62,7 +62,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7976596551193713603, guid: 46d7113f8d083f649ad998abeed323f7, type: 3}
       propertyPath: m_Name
-      value: Cube (3) Variant
+      value: Cube 2x2
       objectReference: {fileID: 0}
     - target: {fileID: 8295298638597406794, guid: 46d7113f8d083f649ad998abeed323f7, type: 3}
       propertyPath: m_VersionIndex
