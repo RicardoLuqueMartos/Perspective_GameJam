@@ -18,7 +18,7 @@ public class ConsoleInteract : MonoBehaviour, IInteractable
         consoleUI.SetActive(true);
     }
 
-    public void LeaveInteract();
+    public void LeaveInteract()
     {
         consoleUI.SetActive(false);
     }

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class ConsoleControle : MonoBehaviour
 {
     [SerializeField] ConsoleInteract consoleInteract;
-    [SerializeField] List<Camera> cameras = new List<Camera>;
+    [SerializeField] List<Camera> cameras = new List<Camera>();
     [SerializeField] Button nextCam;
     [SerializeField] Button previousCam;
     [SerializeField] RawImage camDisplay;
@@ -34,15 +34,15 @@ public class ConsoleControle : MonoBehaviour
     }
     public void NextCam()
     {
-        int currentIndex = System.Array.IndexOf(cameras, currentCam);
-        currentIndex = (currentIndex + 1) % cameras.Length;
+        int currentIndex = cameras.IndexOf(currentCam);
+        currentIndex = (currentIndex + 1) % cameras.Count;
         SetCameraDisplay(cameras[currentIndex]);
     }
 
     public void PreviousCam()
     {
-        int currentIndex = System.Array.IndexOf(cameras, currentCam);
-        currentIndex = (currentIndex - 1 + cameras.Length) % cameras.Length;
+        int currentIndex = cameras.IndexOf(currentCam);
+        currentIndex = (currentIndex - 1 + cameras.Count) % cameras.Count;
         SetCameraDisplay(cameras[currentIndex]);
     }
 }
