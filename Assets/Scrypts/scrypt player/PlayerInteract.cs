@@ -26,10 +26,10 @@ public class PlayerInteract : MonoBehaviour
                 }
            
         }
-        else
+        else if (UiManager.instance != null)
         {
             currentTarget = null;
-            UiManager.Instance.contectuelInteracted("");
+            UiManager.instance.contectuelInteracted("");
         }
     }
 }
