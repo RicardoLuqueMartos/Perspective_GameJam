@@ -28,7 +28,6 @@ public class UiManager : MonoBehaviour
 
     public void OpenCameraConsole(ConsoleInteract consoleInteract)
     {
-        cameraConsole.consoleInteract = consoleInteract;
-        cameraConsole.gameObject.SetActive(true);
+        cameraConsole.OpenCameraConsole(consoleInteract);
     }
 }
