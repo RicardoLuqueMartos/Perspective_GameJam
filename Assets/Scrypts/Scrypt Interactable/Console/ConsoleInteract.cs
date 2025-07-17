@@ -2,14 +2,14 @@ using UnityEngine;
 
 public class ConsoleInteract : MonoBehaviour, IInteractable
 {
-    [SerializeField] ConsoleControle consoleControle;
+    [SerializeField] CameraConsole consoleControle;
     [SerializeField] GameObject consoleUI;
     [SerializeField] string contextuelTXT;
     public void IsInteractable(RaycastHit hit)
     {
         if (hit.collider != null)
         {
-            UiManager.Instance.contectuelInteracted(contextuelTXT);
+            UiManager.instance.contectuelInteracted(contextuelTXT);
         }
     }
 

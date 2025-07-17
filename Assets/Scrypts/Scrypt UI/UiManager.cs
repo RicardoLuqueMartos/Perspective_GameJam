@@ -3,14 +3,16 @@ using UnityEngine;
 
 public class UiManager : MonoBehaviour
 {
-    public static UiManager Instance;
+    public static UiManager instance;
+
+    [SerializeField] private CameraConsole cameraConsole;
 
     public TMP_Text contextuelInteract;
     void Start()
     {
-        if (Instance == null)
+        if (instance == null)
         {
-            Instance = this;
+            instance = this;
             DontDestroyOnLoad(gameObject);
         }
         else
@@ -19,14 +21,14 @@ public class UiManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void contectuelInteracted(string interactTxt)
     {
         contextuelInteract.text = interactTxt;
+    }
+
+    public void OpenCameraConsole(ConsoleInteract consoleInteract)
+    {
+        cameraConsole.consoleInteract = consoleInteract;
+        cameraConsole.gameObject.SetActive(true);
     }
 }
