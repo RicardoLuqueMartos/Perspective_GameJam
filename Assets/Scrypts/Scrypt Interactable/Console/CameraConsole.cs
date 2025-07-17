@@ -35,6 +35,7 @@ public class CameraConsole : MonoBehaviour
     private void OnDisable()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        RBPlayer.instance.UnlockMovements();
     }
     void Update()
     {
@@ -101,4 +102,8 @@ public class CameraConsole : MonoBehaviour
     }
     #endregion Camera selection
 
+    public void ExitConsole()
+    {
+        gameObject.SetActive(false);
+    }
 }
