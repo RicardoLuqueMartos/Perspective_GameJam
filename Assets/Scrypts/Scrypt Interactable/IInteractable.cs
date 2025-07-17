@@ -6,4 +6,6 @@ public interface IInteractable
     public void IsInteractable(RaycastHit hit);
 
     public void Interact();
+
+    public void LeaveInteract();
 }
