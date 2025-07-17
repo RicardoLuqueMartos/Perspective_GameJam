@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: df0b56dab1d99f1468757b154aedcdee
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 307497
+  packageName: FirstPerson_CharacterController_with_Rigidbody_Pusher
+  packageVersion: 1.0
+  assetPath: Assets/FirstPersonController With RB Pusher/Prefabs/RBPlayer.prefab
+  uploadId: 729786

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 0a1c47555070a544daf1a33206443c49
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 307497
+  packageName: FirstPerson_CharacterController_with_Rigidbody_Pusher
+  packageVersion: 1.0
+  assetPath: Assets/FirstPersonController With RB Pusher/DemoScene/DemoFirstPersonController.unity
+  uploadId: 729786

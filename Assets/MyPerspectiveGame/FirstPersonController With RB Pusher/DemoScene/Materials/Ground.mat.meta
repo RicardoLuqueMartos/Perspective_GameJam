@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 01293d7f190f7234091f5b62bf2538b9
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 307497
+  packageName: FirstPerson_CharacterController_with_Rigidbody_Pusher
+  packageVersion: 1.0
+  assetPath: Assets/FirstPersonController With RB Pusher/DemoScene/Materials/Ground.mat
+  uploadId: 729786

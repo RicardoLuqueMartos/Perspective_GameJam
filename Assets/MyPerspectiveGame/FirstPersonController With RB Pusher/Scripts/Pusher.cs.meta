@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: a335c369ce02f5b4f8871091c6543871
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 307497
+  packageName: FirstPerson_CharacterController_with_Rigidbody_Pusher
+  packageVersion: 1.0
+  assetPath: Assets/FirstPersonController With RB Pusher/Scripts/Pusher.cs
+  uploadId: 729786
