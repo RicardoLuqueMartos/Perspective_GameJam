@@ -2235,7 +2235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b431ed2e604c34419d0d576b9eae541, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  contextuelTXT: press E
+  contextuelTXT: press E to control the reflector
   sphereInclinaison: {fileID: 778119736147229527}
   cylindrePivot: {fileID: 4468911473096447662}
   _isControlled: 0

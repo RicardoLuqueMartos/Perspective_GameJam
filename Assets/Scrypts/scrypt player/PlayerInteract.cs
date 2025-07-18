@@ -6,7 +6,7 @@ public class PlayerInteract : MonoBehaviour
     [SerializeField] private float interactDistance = 1f;
     [SerializeField] private LayerMask interactable;
     private RaycastHit hit;
-    private IInteractable currentTarget;
+    [SerializeField] private IInteractable currentTarget;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
 
@@ -17,29 +17,31 @@ public class PlayerInteract : MonoBehaviour
         Physics.Raycast(transform.position , transform.forward, out hit, interactDistance, interactable);
         if (hit.collider != null)
         {
-            Debug.Log(hit.transform.name);
+            
                 currentTarget = hit.collider.GetComponent<IInteractable>();
+            if (currentTarget != null)
+            {
+                Debug.Log(hit.transform.name);
                 currentTarget.IsInteractable(hit);
-                if (Input.GetKeyDown(KeyCode.E) )
-
+                if (Input.GetKeyDown(KeyCode.E))
                 {
                     if (!currentTarget.isControlled())
-                    { 
+                    {
                         currentTarget.Interact();
-                    RBPlayer.instance.LockMovements();
                     }
-                    else 
+                    else
                     {
                         currentTarget.LeaveInteract();
-                    RBPlayer.instance.UnlockMovements();
+                    }
                 }
-                }
+            }
 
         }
         else if (UiManager.instance != null)
         {
             currentTarget = null;
             UiManager.instance.contectuelInteracted("");
+            UiManager.instance.Hidecontectuel();
         }
     }
 }

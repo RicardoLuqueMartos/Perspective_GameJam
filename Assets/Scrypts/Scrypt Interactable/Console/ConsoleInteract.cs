@@ -12,7 +12,7 @@ public class ConsoleInteract : MonoBehaviour, IInteractable
     public int cameraIndex = 0;
     public int ReflectorIndex = 0;
 
-    bool _isControlled = false;
+    public bool _isControlled = false;
     public bool isControlled()
     {
         return _isControlled;
@@ -37,7 +37,7 @@ public class ConsoleInteract : MonoBehaviour, IInteractable
 
     public void LeaveInteract()
     {
-        consoleUI.SetActive(false);
+    //    UiManager.instance.con.SetActive(false);
         _isControlled = false;
     }
     

@@ -7,21 +7,25 @@ public class ReflectorConsole : MonoBehaviour
 
     public void RotateLeft()
     {
-     //   CameraConsole.instance.consoleInteract.LinkedReflectorsList[CameraConsole.instance.consoleInteract.ReflectorIndex].
+        CameraConsole.instance.consoleInteract.LinkedReflectorsList[CameraConsole.instance.consoleInteract.ReflectorIndex]
+            .RotateLeft();
     }
 
     public void RotateRight()
     {
-
+        CameraConsole.instance.consoleInteract.LinkedReflectorsList[CameraConsole.instance.consoleInteract.ReflectorIndex]
+            .RotateRight();
     }
     public void RotateUp()
     {
-
+        CameraConsole.instance.consoleInteract.LinkedReflectorsList[CameraConsole.instance.consoleInteract.ReflectorIndex]
+            .RotateUp();
     }
 
     public void RotateDown()
     {
-
+        CameraConsole.instance.consoleInteract.LinkedReflectorsList[CameraConsole.instance.consoleInteract.ReflectorIndex]
+            .RotateDown();
     }
 
     public void NextReflector()

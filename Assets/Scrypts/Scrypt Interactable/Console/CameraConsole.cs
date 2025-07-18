@@ -51,7 +51,9 @@ public class CameraConsole : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.None;
         RBPlayer.instance.LockMovements();
+        RBPlayer.instance.LockRotate();
 
+        UiManager.instance.Hidecontectuel();
         InitRenderTexturesList();
         InitReflectorsPanel();
         SetCameraDisplay();
@@ -60,6 +62,7 @@ public class CameraConsole : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         RBPlayer.instance.UnlockMovements();
+        RBPlayer.instance.UnlockRotate();
     }
 
     public void OpenCameraConsole(ConsoleInteract consoleInteract)
