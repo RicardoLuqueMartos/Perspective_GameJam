@@ -1,16 +1,46 @@
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UiManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [SerializeField] GameSettingsData gameSettingsData;
+
+    public static UiManager instance;
+
+    [SerializeField] private CameraConsole cameraConsole;
+
+    public TMP_Text contextuelInteract;
+
+    [SerializeField] Image tesseractImage;
+
     void Start()
     {
-        
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void contectuelInteracted(string interactTxt)
     {
-        
+        contextuelInteract.text = interactTxt;
     }
+
+    public void OpenCameraConsole(ConsoleInteract consoleInteract)
+    {
+        cameraConsole.OpenCameraConsole(consoleInteract);
+    }
+
+    public void DisplayTesseract(bool value)
+    {
+        tesseractImage.sprite = gameSettingsData.tesseractSprite;
+        tesseractImage.gameObject.SetActive(value);
+    }
+
 }
