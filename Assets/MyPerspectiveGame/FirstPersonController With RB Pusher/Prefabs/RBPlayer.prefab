@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 7147327766554863251}
   - component: {fileID: 4770133792586843274}
   - component: {fileID: 2841265818853020721}
+  - component: {fileID: 3597130471515541419}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -159,7 +160,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 55
+    m_Bits: 4294967295
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -223,6 +224,22 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!114 &3597130471515541419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1306421198598740619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0de3cb262d60c3846a4b879384954e26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactDistance: 2
+  interactable:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!1 &2163193813142575818
 GameObject:
   m_ObjectHideFlags: 0
@@ -236,6 +253,7 @@ GameObject:
   - component: {fileID: 2527283519963775152}
   - component: {fileID: 6003987945294412375}
   - component: {fileID: 9048840754835589627}
+  - component: {fileID: 3279800969405682044}
   m_Layer: 0
   m_Name: RBPlayer
   m_TagString: Player
@@ -350,3 +368,16 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   pushing: 1
+--- !u!114 &3279800969405682044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2163193813142575818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be55c477b7afe4b44adcb80a88bc68ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tesseractAmount: 0
