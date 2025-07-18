@@ -5,7 +5,6 @@ using UnityEngine;
 public class ConsoleInteract : MonoBehaviour, IInteractable
 {
     public List<Camera> camerasList = new List<Camera>();
-    [SerializeField] CameraConsole consoleControle;
     [SerializeField] GameObject consoleUI;
     [SerializeField] string contextuelTXT;
     public int cameraIndex = 0;
