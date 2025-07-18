@@ -7,22 +7,28 @@ using UnityEngine.UI;
 
 public class CameraConsole : MonoBehaviour
 {
-   public ConsoleInteract consoleInteract;
-  //  public List<Camera> camerasList = new List<Camera>();
-    [SerializeField] List<RenderTexture> renderTexturesList = new List<RenderTexture>();
+    #region Variables
+    public ConsoleInteract consoleInteract;
+
+    [Header("UI Elements")]
     [SerializeField] Button nextCam;
     [SerializeField] Button previousCam;
     [SerializeField] RawImage camDisplay;
     [SerializeField] TMP_Text indexText;
+    [SerializeField] ReflectorConsole reflectorsConsole;
+    [Header("RenderTexture Settings")]
+    [SerializeField] List<RenderTexture> renderTexturesList = new List<RenderTexture>();
     [SerializeField] int renderTextureCurrentSizeX = 854;
     [SerializeField] int renderTextureCurrentSizeY = 480;
     [SerializeField] FilterMode m_filterMode = FilterMode.Point;
     [SerializeField] GraphicsFormat format;
-    private Camera currentCam;
-    public int currentCameraIndex;
+ //   public int currentCameraIndex;
 
     public static CameraConsole instance;
 
+    #endregion Variables
+
+    #region Init
     private void Awake()
     {
         CreateInstance();
@@ -39,6 +45,7 @@ public class CameraConsole : MonoBehaviour
             instance = this;
         }
     }
+    #endregion Init
 
     private void OnEnable()
     {
@@ -46,6 +53,7 @@ public class CameraConsole : MonoBehaviour
         RBPlayer.instance.LockMovements();
 
         InitRenderTexturesList();
+        InitReflectorsPanel();
         SetCameraDisplay();
     }
     private void OnDisable()
@@ -56,12 +64,10 @@ public class CameraConsole : MonoBehaviour
 
     public void OpenCameraConsole(ConsoleInteract consoleInteract)
     {
-     //   consoleInteract = consoleInteract;
-    //    camerasList = consoleInteract.camerasList;
-        currentCameraIndex = consoleInteract.cameraIndex;
         gameObject.SetActive(true);
     }
 
+    #region Camera view
     void InitRenderTexturesList()
     {
         renderTexturesList.Clear();
@@ -87,17 +93,30 @@ public class CameraConsole : MonoBehaviour
             filterMode = m_filterMode
         };
     }
+    #endregion Camera view
+
+    #region Reflectors management
+    void InitReflectorsPanel()
+    {
+        if (consoleInteract.LinkedReflectorsList.Count > 0)
+        {
+            reflectorsConsole.DisplayIndex();
+            reflectorsConsole.gameObject.SetActive(true);
+        }
+        else reflectorsConsole.gameObject.SetActive(false);
+    }
+
+    #endregion Reflectors management
 
     #region Camera Display
     private void SetCameraDisplay()
     {
-        Camera cam = consoleInteract.camerasList[currentCameraIndex];
-        currentCam = cam;
-        indexText.text = (currentCameraIndex + 1).ToString();
+        Camera cam = consoleInteract.camerasList[consoleInteract.cameraIndex];
+     //   currentCam = cam;
+        indexText.text = (consoleInteract.cameraIndex + 1).ToString();
         if (cam != null)
         {
-            camDisplay.texture = renderTexturesList[currentCameraIndex];
-            consoleInteract.cameraIndex = currentCameraIndex;
+            camDisplay.texture = renderTexturesList[consoleInteract.cameraIndex];
         }
         else
         {
@@ -110,13 +129,13 @@ public class CameraConsole : MonoBehaviour
     #region Camera selection
     public void NextCam()
     {
-        currentCameraIndex = (currentCameraIndex + 1) % consoleInteract.camerasList.Count;
+        consoleInteract.cameraIndex = (consoleInteract.cameraIndex + 1) % consoleInteract.camerasList.Count;
         SetCameraDisplay();
     }
 
     public void PreviousCam()
     {
-        currentCameraIndex = (currentCameraIndex - 1 + consoleInteract.camerasList.Count) % consoleInteract.camerasList.Count;
+        consoleInteract.cameraIndex = (consoleInteract.cameraIndex - 1 + consoleInteract.camerasList.Count) % consoleInteract.camerasList.Count;
         SetCameraDisplay();
     }
     #endregion Camera selection
