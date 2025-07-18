@@ -26,11 +26,13 @@ public class PlayerInteract : MonoBehaviour
                     if (!currentTarget.isControlled())
                     { 
                         currentTarget.Interact();
+                    RBPlayer.instance.LockMovements();
                     }
                     else 
                     {
-                    currentTarget.LeaveInteract();
-                    }
+                        currentTarget.LeaveInteract();
+                    RBPlayer.instance.UnlockMovements();
+                }
                 }
 
         }
