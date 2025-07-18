@@ -1,23 +1,13 @@
+using TMPro;
 using UnityEngine;
 
 public class ReflectorConsole : MonoBehaviour
 {
-    public Transform reflectorHeadTransform;
-
-    private void OnEnable()
-    {
-        Cursor.lockState = CursorLockMode.None;
-        RBPlayer.instance.LockMovements();
-    }
-    private void OnDisable()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
-        RBPlayer.instance.UnlockMovements();
-    }
+    public TMP_Text indexText;
 
     public void RotateLeft()
     {
-    //    reflectorHeadTransform.Rotate = 
+     //   CameraConsole.instance.consoleInteract.LinkedReflectorsList[CameraConsole.instance.consoleInteract.ReflectorIndex].
     }
 
     public void RotateRight()
@@ -34,10 +24,22 @@ public class ReflectorConsole : MonoBehaviour
 
     }
 
-
-
-    public void ExitConsole()
+    public void NextReflector()
     {
-        gameObject.SetActive(false);
+        CameraConsole.instance.consoleInteract.ReflectorIndex = (CameraConsole.instance.consoleInteract.ReflectorIndex + 1) 
+            % CameraConsole.instance.consoleInteract.LinkedReflectorsList.Count;
+        DisplayIndex();
+    }
+
+    public void PreviousReflector()
+    {
+        CameraConsole.instance.consoleInteract.ReflectorIndex = (CameraConsole.instance.consoleInteract.ReflectorIndex - 1)
+            % CameraConsole.instance.consoleInteract.LinkedReflectorsList.Count;
+        DisplayIndex();
+    }
+
+    public void DisplayIndex()
+    {
+        indexText.text = (CameraConsole.instance.consoleInteract.ReflectorIndex+1).ToString();
     }
 }

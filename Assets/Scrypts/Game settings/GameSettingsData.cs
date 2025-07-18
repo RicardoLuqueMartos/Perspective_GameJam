@@ -1,9 +1,10 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "GameSettingsData", menuName = "Scriptable Objects/GameSettingsData")]
 public class GameSettingsData : ScriptableObject
 {
-    public float reflectorRotationSpeed = .1f;
+    public Sprite tesseractSprite;
 
 
 }

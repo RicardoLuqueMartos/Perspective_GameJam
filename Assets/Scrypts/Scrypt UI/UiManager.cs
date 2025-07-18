@@ -1,13 +1,19 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UiManager : MonoBehaviour
 {
+    [SerializeField] GameSettingsData gameSettingsData;
+
     public static UiManager instance;
 
     [SerializeField] private CameraConsole cameraConsole;
 
     public TMP_Text contextuelInteract;
+
+    [SerializeField] Image tesseractImage;
+
     void Start()
     {
         if (instance == null)
@@ -30,4 +36,11 @@ public class UiManager : MonoBehaviour
     {
         cameraConsole.OpenCameraConsole(consoleInteract);
     }
+
+    public void DisplayTesseract(bool value)
+    {
+        tesseractImage.sprite = gameSettingsData.tesseractSprite;
+        tesseractImage.gameObject.SetActive(value);
+    }
+
 }

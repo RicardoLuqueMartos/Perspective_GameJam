@@ -17,7 +17,7 @@ public class PlayerInteract : MonoBehaviour
         Physics.Raycast(transform.position , transform.forward, out hit, interactDistance, interactable);
         if (hit.collider != null)
         {
-
+            Debug.Log(hit.transform.name);
                 currentTarget = hit.collider.GetComponent<IInteractable>();
                 currentTarget.IsInteractable(hit);
                 if (Input.GetKeyDown(KeyCode.E) )
