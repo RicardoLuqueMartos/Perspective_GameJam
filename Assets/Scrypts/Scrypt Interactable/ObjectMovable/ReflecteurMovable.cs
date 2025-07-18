@@ -1,19 +1,24 @@
 using TMPro;
 using UnityEngine;
 
-public class NewMonoBehaviourScript : MonoBehaviour, IInteractable
+public class ReflecteurMovable : MonoBehaviour, IInteractable
 {
     [SerializeField] string contextuelTXT;
     [SerializeField] GameObject reflecteur;
-    public bool isControlled;
+    public bool _isControlled;
     public int moveForce;
+
+    public bool isControlled()
+    {
+        return _isControlled;
+    }
     public void IsInteractable(RaycastHit hit)
     {
         if (hit.collider != null)
         {
             UiManager.instance.contectuelInteracted(contextuelTXT);
 
-            if (Input.GetKeyDown(KeyCode.E) && !isControlled)
+            /*if (Input.GetKeyDown(KeyCode.E) && !isControlled)
                 
             {
                 Interact();
@@ -22,17 +27,17 @@ public class NewMonoBehaviourScript : MonoBehaviour, IInteractable
             if (Input.GetKeyDown(KeyCode.E) && isControlled)
             {
                 LeaveInteract();
-            }
+            }*/
         }
     }
     public void Interact()
     {
-        isControlled = true;
+        _isControlled = true;
     }
 
     public void LeaveInteract()
     {
-        isControlled = false;
+        _isControlled = false;
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -44,14 +49,14 @@ public class NewMonoBehaviourScript : MonoBehaviour, IInteractable
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (isControlled)
+        if (_isControlled)
         {
             if ( Input.GetKey(KeyCode.T) )
             {
                 reflecteur.gameObject.transform.Rotate(0, 0, moveForce * Time.deltaTime);
                 if (reflecteur.gameObject.transform.rotation.z < 90)
                 {
-                                       reflecteur.gameObject.transform.rotation = Quaternion.Euler(0, 0, 90);
+                    reflecteur.gameObject.transform.rotation = Quaternion.Euler(0, 0, 90);
                 }
             }
             if ( Input.GetKey(KeyCode.G))

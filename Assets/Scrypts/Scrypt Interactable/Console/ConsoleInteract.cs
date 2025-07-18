@@ -5,6 +5,11 @@ public class ConsoleInteract : MonoBehaviour, IInteractable
     [SerializeField] CameraConsole consoleControle;
     [SerializeField] GameObject consoleUI;
     [SerializeField] string contextuelTXT;
+    bool _isControlled = false;
+    public bool isControlled()
+    {
+        return _isControlled;
+    }
     public void IsInteractable(RaycastHit hit)
     {
         if (hit.collider != null)

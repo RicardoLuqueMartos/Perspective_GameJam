@@ -20,11 +20,20 @@ public class PlayerInteract : MonoBehaviour
 
                 currentTarget = hit.collider.GetComponent<IInteractable>();
                 currentTarget.IsInteractable(hit);
-                if (Input.GetKeyDown(KeyCode.E))
+                if (Input.GetKeyDown(KeyCode.E) )
+
                 {
-                    currentTarget.Interact();
+                    if (!currentTarget.isControlled())
+                    { 
+                        currentTarget.Interact();
+                    }
+                    else 
+                    {
+                    currentTarget.LeaveInteract();
+                    }
                 }
-           
+
+
         }
         else if (UiManager.instance != null)
         {
