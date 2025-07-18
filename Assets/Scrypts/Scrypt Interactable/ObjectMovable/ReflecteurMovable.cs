@@ -4,7 +4,8 @@ using UnityEngine;
 public class ReflecteurMovable : MonoBehaviour, IInteractable
 {
     [SerializeField] string contextuelTXT;
-    [SerializeField] GameObject reflecteur;
+    [SerializeField] GameObject sphereInclinaison;
+    [SerializeField] GameObject cylindrePivot;
     public bool _isControlled;
     public int moveForce;
 
@@ -18,16 +19,6 @@ public class ReflecteurMovable : MonoBehaviour, IInteractable
         {
             UiManager.instance.contectuelInteracted(contextuelTXT);
 
-            /*if (Input.GetKeyDown(KeyCode.E) && !isControlled)
-                
-            {
-                Interact();
-            }
-
-            if (Input.GetKeyDown(KeyCode.E) && isControlled)
-            {
-                LeaveInteract();
-            }*/
         }
     }
     public void Interact()
@@ -51,30 +42,37 @@ public class ReflecteurMovable : MonoBehaviour, IInteractable
     {
         if (_isControlled)
         {
+            float currentZ = sphereInclinaison.transform.localEulerAngles.z;
+            if (currentZ > 180) currentZ -= 360;
             if ( Input.GetKey(KeyCode.T) )
             {
-                reflecteur.gameObject.transform.Rotate(0, 0, moveForce * Time.deltaTime);
-                if (reflecteur.gameObject.transform.rotation.z < 90)
-                {
-                    reflecteur.gameObject.transform.rotation = Quaternion.Euler(0, 0, 90);
-                }
+                 // Pour gérer les angles négatifs
+
+                float newZ = Mathf.Clamp(currentZ + moveForce * Time.deltaTime, -90, 90);
+                sphereInclinaison.transform.localEulerAngles = new Vector3(
+                    sphereInclinaison.transform.localEulerAngles.x,
+                    sphereInclinaison.transform.localEulerAngles.y,
+                    newZ
+                );
+
             }
             if ( Input.GetKey(KeyCode.G))
             {
-                reflecteur.gameObject.transform.Rotate(0, 0, -moveForce * Time.deltaTime);
-                if (reflecteur.gameObject.transform.rotation.z > -90)
-                {
-                    reflecteur.gameObject.transform.rotation = Quaternion.Euler(0, 0, -90);
-                }
+                float newZ = Mathf.Clamp(currentZ  -moveForce * Time.deltaTime, -90, 90);
+                sphereInclinaison.transform.localEulerAngles = new Vector3(
+                    sphereInclinaison.transform.localEulerAngles.x,
+                    sphereInclinaison.transform.localEulerAngles.y,
+                    newZ
+                );
             }
 
             if (Input.GetKey(KeyCode.F))
             {
-                reflecteur.gameObject.transform.Rotate(moveForce * Time.deltaTime, 0, 0);
+                cylindrePivot.gameObject.transform.Rotate(0, -moveForce * Time.deltaTime, 0);
             }
             if (Input.GetKey(KeyCode.H))
             {
-                reflecteur.gameObject.transform.Rotate(-moveForce * Time.deltaTime, 0, 0);
+                cylindrePivot.gameObject.transform.Rotate(0, moveForce * Time.deltaTime, 0);
             }
 
         }

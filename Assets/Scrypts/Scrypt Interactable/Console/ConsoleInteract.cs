@@ -32,11 +32,13 @@ public class ConsoleInteract : MonoBehaviour, IInteractable
     {
      //   consoleUI.SetActive(true);
         UiManager.instance.OpenCameraConsole(this);
+        _isControlled = true;
     }
 
     public void LeaveInteract()
     {
         consoleUI.SetActive(false);
+        _isControlled = false;
     }
     
 }
