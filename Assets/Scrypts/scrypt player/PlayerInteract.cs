@@ -17,14 +17,24 @@ public class PlayerInteract : MonoBehaviour
         Physics.Raycast(transform.position , transform.forward, out hit, interactDistance, interactable);
         if (hit.collider != null)
         {
-            currentTarget = hit.collider.GetComponent<IInteractable>();
-            currentTarget.IsInteractable(hit);
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                currentTarget.Interact();
-            }
+
+                currentTarget = hit.collider.GetComponent<IInteractable>();
+                currentTarget.IsInteractable(hit);
+                if (Input.GetKeyDown(KeyCode.E) )
+
+                {
+                    if (!currentTarget.isControlled())
+                    { 
+                        currentTarget.Interact();
+                    }
+                    else 
+                    {
+                    currentTarget.LeaveInteract();
+                    }
+                }
+
         }
-        else
+        else if (UiManager.instance != null)
         {
             currentTarget = null;
             UiManager.instance.contectuelInteracted("");
