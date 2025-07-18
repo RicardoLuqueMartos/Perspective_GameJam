@@ -1,15 +1,22 @@
+using NUnit.Framework;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ConsoleInteract : MonoBehaviour, IInteractable
 {
-    [SerializeField] CameraConsole consoleControle;
+    public List<Camera> camerasList = new List<Camera>();
     [SerializeField] GameObject consoleUI;
     [SerializeField] string contextuelTXT;
+    public int cameraIndex = 0;
+
     bool _isControlled = false;
     public bool isControlled()
     {
         return _isControlled;
     }
+
+
+
     public void IsInteractable(RaycastHit hit)
     {
         if (hit.collider != null)
@@ -20,7 +27,8 @@ public class ConsoleInteract : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        consoleUI.SetActive(true);
+     //   consoleUI.SetActive(true);
+        UiManager.instance.OpenCameraConsole(this);
     }
 
     public void LeaveInteract()

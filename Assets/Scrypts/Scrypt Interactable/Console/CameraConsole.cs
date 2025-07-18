@@ -7,8 +7,8 @@ using UnityEngine.UI;
 
 public class CameraConsole : MonoBehaviour
 {
-    [SerializeField] public ConsoleInteract consoleInteract;
-    [SerializeField] List<Camera> camerasList = new List<Camera>();
+   public ConsoleInteract consoleInteract;
+  //  public List<Camera> camerasList = new List<Camera>();
     [SerializeField] List<RenderTexture> renderTexturesList = new List<RenderTexture>();
     [SerializeField] Button nextCam;
     [SerializeField] Button previousCam;
@@ -19,34 +19,55 @@ public class CameraConsole : MonoBehaviour
     [SerializeField] FilterMode m_filterMode = FilterMode.Point;
     [SerializeField] GraphicsFormat format;
     private Camera currentCam;
+    public int currentCameraIndex;
 
-    void Start()
+    public static CameraConsole instance;
+
+    private void Awake()
     {
-        InitRenderTexturesList();
-        SetCameraDisplay(0);
+        CreateInstance();
+    }
+
+    void CreateInstance()
+    {
+        if (instance != null && instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            instance = this;
+        }
     }
 
     private void OnEnable()
     {
         Cursor.lockState = CursorLockMode.None;
         RBPlayer.instance.LockMovements();
-     //   RBPlayer.ins
+
+        InitRenderTexturesList();
+        SetCameraDisplay();
     }
     private void OnDisable()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        RBPlayer.instance.UnlockMovements();
     }
-    void Update()
+
+    public void OpenCameraConsole(ConsoleInteract consoleInteract)
     {
-        
+     //   consoleInteract = consoleInteract;
+    //    camerasList = consoleInteract.camerasList;
+        currentCameraIndex = consoleInteract.cameraIndex;
+        gameObject.SetActive(true);
     }
 
     void InitRenderTexturesList()
     {
         renderTexturesList.Clear();
-        for (int i = 0; i < camerasList.Count; i++)
+        for (int i = 0; i < consoleInteract.camerasList.Count; i++)
         {
-            Camera cam = camerasList[i];
+            Camera cam = consoleInteract.camerasList[i];
             RenderTexture newRT = CreateRenderTexture(cam);
             renderTexturesList.Add(newRT);
             cam.targetTexture = newRT;
@@ -68,14 +89,15 @@ public class CameraConsole : MonoBehaviour
     }
 
     #region Camera Display
-    private void SetCameraDisplay(int cameraIndex)
+    private void SetCameraDisplay()
     {
-        Camera cam = camerasList[cameraIndex];
+        Camera cam = consoleInteract.camerasList[currentCameraIndex];
         currentCam = cam;
-        indexText.text = (cameraIndex+1).ToString();
+        indexText.text = (currentCameraIndex + 1).ToString();
         if (cam != null)
         {
-            camDisplay.texture = renderTexturesList[cameraIndex];
+            camDisplay.texture = renderTexturesList[currentCameraIndex];
+            consoleInteract.cameraIndex = currentCameraIndex;
         }
         else
         {
@@ -88,17 +110,19 @@ public class CameraConsole : MonoBehaviour
     #region Camera selection
     public void NextCam()
     {
-        int currentIndex = camerasList.IndexOf(currentCam);
-        currentIndex = (currentIndex + 1) % camerasList.Count;
-        SetCameraDisplay(currentIndex);
+        currentCameraIndex = (currentCameraIndex + 1) % consoleInteract.camerasList.Count;
+        SetCameraDisplay();
     }
 
     public void PreviousCam()
     {
-        int currentIndex = camerasList.IndexOf(currentCam);
-        currentIndex = (currentIndex - 1 + camerasList.Count) % camerasList.Count;
-        SetCameraDisplay(currentIndex);
+        currentCameraIndex = (currentCameraIndex - 1 + consoleInteract.camerasList.Count) % consoleInteract.camerasList.Count;
+        SetCameraDisplay();
     }
     #endregion Camera selection
 
+    public void ExitConsole()
+    {
+        gameObject.SetActive(false);
+    }
 }

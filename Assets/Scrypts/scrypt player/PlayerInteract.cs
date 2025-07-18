@@ -33,7 +33,6 @@ public class PlayerInteract : MonoBehaviour
                     }
                 }
 
-
         }
         else if (UiManager.instance != null)
         {
