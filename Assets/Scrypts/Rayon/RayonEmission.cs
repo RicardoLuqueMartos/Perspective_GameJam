@@ -12,6 +12,9 @@ public class RayonEmission : MonoBehaviour
     public bool powered;
     Vector3 directionWithOutHit;
 
+    [SerializeField] private ReccepteurRayon lastReccepteurRayon;
+    [SerializeField] private ReccepteurRayon currentReccepteurRayon;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created  
     void Start()
     {
@@ -109,9 +112,36 @@ public class RayonEmission : MonoBehaviour
                     {
 
                         rayonRenderer.SetPosition(hits.Count + 1, directionWithOutHit * 100f);
+                        if (currentReccepteurRayon != null)
+                        currentReccepteurRayon.SetPowered(false);
+                        currentReccepteurRayon = null;
                     }
+
+                    if (!endWithOutHit && hits.Count > 0)
+                    {
+                        RaycastHit lastHitOnSurface = hits[hits.Count - 1];
+
+                        if (lastHitOnSurface.collider.GetComponent<ReccepteurRayon>())
+                        { 
+                            currentReccepteurRayon = lastHitOnSurface.collider.GetComponent<ReccepteurRayon>();
+                            currentReccepteurRayon.SetPowered(true);
+                        }
+                        else if (currentReccepteurRayon != null)
+                        {
+                            currentReccepteurRayon.SetPowered(false);
+                            currentReccepteurRayon = null;
+                        }
+
+                    }
+
+
                 }
             }
+
+            if (!endWithOutHit && hits.Count > 0)
+                Debug.Log("Rayon ending on " + hits[hits.Count - 1].collider.name);
+            else
+                Debug.Log("RayonRenderer has no hits, setting to default length.");
         }
     }
 
