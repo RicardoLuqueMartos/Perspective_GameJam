@@ -5,6 +5,7 @@ public class GameProgressManager : MonoBehaviour
 {
     #region Variables
     [SerializeField] private int tesseractAmount = 0;
+    public GameObject prefabTeresac;
 
 
     public static GameProgressManager instance;
