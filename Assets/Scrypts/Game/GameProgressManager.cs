@@ -4,6 +4,14 @@ using static UnityEngine.Rendering.DebugUI;
 public class GameProgressManager : MonoBehaviour
 {
     #region Variables
+    [SerializeField] public int currentLevel = 0;
+    [SerializeField] public Transform[] respawnTransform;
+    [SerializeField] public ReccepteurRayon[] lvlReccepteur;
+    [SerializeField] public GameObject[] bridgeToNextLvl;
+    
+
+
+
     [SerializeField] private int tesseractAmount = 0;
     public GameObject prefabTeresac;
 
