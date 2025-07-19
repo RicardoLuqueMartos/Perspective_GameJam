@@ -8,7 +8,7 @@ public class SocleTeresac : MonoBehaviour, IInteractable
     [SerializeField] RayonEmission rayon;
     [SerializeField] Transform socleTeresac;
 
-    [SerializeField] GameObject teresac;
+    [SerializeField] public GameObject teresac;
 
     PlayerInteract _playerInteract;
 

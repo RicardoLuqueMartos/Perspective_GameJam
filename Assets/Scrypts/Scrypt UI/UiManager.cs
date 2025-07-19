@@ -16,7 +16,7 @@ public class UiManager : MonoBehaviour
     public GameObject RefectorQuitPanel;
 
     [SerializeField] Image tesseractImage;
-
+    [SerializeField] public Image fadingPanel;
     void Start()
     {
         if (instance == null)

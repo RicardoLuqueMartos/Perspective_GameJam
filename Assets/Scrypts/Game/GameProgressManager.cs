@@ -1,9 +1,19 @@
 using UnityEngine;
+using UnityEngine.Rendering;
 using static UnityEngine.Rendering.DebugUI;
+using System.Collections;
+using Unity.VisualScripting;
 
 public class GameProgressManager : MonoBehaviour
 {
     #region Variables
+    [SerializeField] public Transform currentRespawnTransform;
+
+
+
+
+
+
     [SerializeField] private int tesseractAmount = 0;
     public GameObject prefabTeresac;
 
@@ -59,4 +69,5 @@ public class GameProgressManager : MonoBehaviour
         if (tesseractAmount > 0) response = true;
         return response;
     }
+    
 }

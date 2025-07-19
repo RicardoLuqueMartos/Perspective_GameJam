@@ -12,7 +12,7 @@ public class RayonEmission : MonoBehaviour
     public bool powered;
     Vector3 directionWithOutHit;
 
-    [SerializeField] private ReccepteurRayon lastReccepteurRayon;
+    //[SerializeField] private ReccepteurRayon lastReccepteurRayon;
     [SerializeField] private ReccepteurRayon currentReccepteurRayon;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created  
@@ -60,9 +60,10 @@ public class RayonEmission : MonoBehaviour
                     while (true)
                     {
                         Vector3 newDirection = Vector3.Reflect(currentDirection, lastHit.normal);
-                        Debug.Log("Rayon Direction: " + newDirection);
-                        Physics.Raycast(lastHit.point, newDirection, out RaycastHit newhit);
-                        Debug.DrawRay(lastHit.point, lastHit.normal, Color.red, 2f);
+                        //Debug.Log("Rayon Direction: " + newDirection);
+                        Vector3 startPoint = lastHit.point + newDirection * 0.01f; // Offset pour éviter le décalage
+                        Physics.Raycast(startPoint, newDirection, out RaycastHit newhit);
+                        //Debug.DrawRay(lastHit.point, lastHit.normal, Color.red, 2f);
                         if (newhit.collider != null && !newhit.collider.CompareTag("Reflecteur"))
                         {
                             hits.Add(newhit);
@@ -110,8 +111,8 @@ public class RayonEmission : MonoBehaviour
                     // Si le rayon finit sans impact
                     if (endWithOutHit)
                     {
-
-                        rayonRenderer.SetPosition(hits.Count + 1, directionWithOutHit * 100f);
+                        Vector3 lastPoint = hits[hits.Count - 1].point;
+                        rayonRenderer.SetPosition(hits.Count + 1, lastPoint + directionWithOutHit * 100f);
                         if (currentReccepteurRayon != null)
                         currentReccepteurRayon.SetPowered(false);
                         currentReccepteurRayon = null;
@@ -154,6 +155,11 @@ public class RayonEmission : MonoBehaviour
     public void TurnOff()
     {
         powered = false;
+        if (currentReccepteurRayon != null)
+        {
+            currentReccepteurRayon.SetPowered(false);
+            currentReccepteurRayon = null;
+        }
         // Pour désactiver le LineRenderer, il faut utiliser la propriété 'enabled' (avec un 'd' minuscule) :
         rayonRenderer.enabled = false; // Réinitialise le LineRenderer
     }
