@@ -12,7 +12,7 @@ public class RayonEmission : MonoBehaviour
     public bool powered;
     Vector3 directionWithOutHit;
 
-    [SerializeField] private ReccepteurRayon lastReccepteurRayon;
+    //[SerializeField] private ReccepteurRayon lastReccepteurRayon;
     [SerializeField] private ReccepteurRayon currentReccepteurRayon;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created  
@@ -155,6 +155,11 @@ public class RayonEmission : MonoBehaviour
     public void TurnOff()
     {
         powered = false;
+        if (currentReccepteurRayon != null)
+        {
+            currentReccepteurRayon.SetPowered(false);
+            currentReccepteurRayon = null;
+        }
         // Pour désactiver le LineRenderer, il faut utiliser la propriété 'enabled' (avec un 'd' minuscule) :
         rayonRenderer.enabled = false; // Réinitialise le LineRenderer
     }

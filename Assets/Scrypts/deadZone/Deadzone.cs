@@ -1,4 +1,7 @@
 using UnityEngine;
+using System.Collections.Generic;
+using System.Collections;
+using DG.Tweening;
 
 public class Deadzone : MonoBehaviour
 {
@@ -14,11 +17,24 @@ public class Deadzone : MonoBehaviour
         
     }
 
-    public void OnCollisionEnter(Collision collision)
+    public void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Teserac"))
+        if (other.gameObject.CompareTag("Teserac"))
         {
-            collision.gameObject.transform.position = GameProgressManager.instance.respawnTransform[GameProgressManager.instance.currentLevel].position;
+            other.gameObject.transform.position = GameProgressManager.instance.currentRespawnTransform.position;
         }
+        if (other.gameObject.CompareTag("Player"))
+        {
+            StartCoroutine(FadeOutToRespawn());
+        }
+    }
+
+    public IEnumerator FadeOutToRespawn()
+    {
+        UiManager.instance.fadingPanel.DOFade(1, 1);
+        yield return new WaitForSeconds(2);
+        RBPlayer.instance.transform.position = GameProgressManager.instance.currentRespawnTransform.position;
+        UiManager.instance.fadingPanel.DOFade(0, 2);
+        yield break;
     }
 }

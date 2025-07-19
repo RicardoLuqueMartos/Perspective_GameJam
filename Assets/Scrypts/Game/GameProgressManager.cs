@@ -1,14 +1,16 @@
 using UnityEngine;
+using UnityEngine.Rendering;
 using static UnityEngine.Rendering.DebugUI;
+using System.Collections;
+using Unity.VisualScripting;
 
 public class GameProgressManager : MonoBehaviour
 {
     #region Variables
-    [SerializeField] public int currentLevel = 0;
-    [SerializeField] public Transform[] respawnTransform;
-    [SerializeField] public ReccepteurRayon[] lvlReccepteur;
-    [SerializeField] public GameObject[] bridgeToNextLvl;
-    
+    [SerializeField] public Transform currentRespawnTransform;
+
+
+
 
 
 
@@ -67,4 +69,5 @@ public class GameProgressManager : MonoBehaviour
         if (tesseractAmount > 0) response = true;
         return response;
     }
+    
 }
