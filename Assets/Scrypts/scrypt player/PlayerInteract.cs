@@ -7,6 +7,8 @@ public class PlayerInteract : MonoBehaviour
     [SerializeField] private LayerMask interactable;
     private RaycastHit hit;
     [SerializeField] private IInteractable currentTarget;
+
+    public bool isInteracting = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
 
@@ -14,20 +16,22 @@ public class PlayerInteract : MonoBehaviour
     void Update()
     {
         //hit = new RaycastHit();
-        Physics.Raycast(transform.position , transform.forward, out hit, interactDistance, interactable);
+        //Physics.Raycast(transform.position , transform.forward, out hit, interactDistance, interactable);
+        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+        Physics.Raycast(ray, out hit, interactDistance, interactable);
         if (hit.collider != null)
         {
             
                 currentTarget = hit.collider.GetComponent<IInteractable>();
             if (currentTarget != null)
             {
-                Debug.Log(hit.transform.name);
+                //Debug.Log(hit.transform.name);
                 currentTarget.IsInteractable(hit);
                 if (Input.GetKeyDown(KeyCode.E))
                 {
                     if (!currentTarget.isControlled())
                     {
-                        currentTarget.Interact();
+                        currentTarget.Interact(this);
                     }
                     else
                     {
@@ -37,7 +41,7 @@ public class PlayerInteract : MonoBehaviour
             }
 
         }
-        else if (UiManager.instance != null)
+        else if (UiManager.instance != null && !isInteracting)
         {
             currentTarget = null;
             UiManager.instance.contectuelInteracted("");

@@ -21,7 +21,7 @@ public class Item : MonoBehaviour, IInteractable
         }
     }
 
-    public void Interact()
+    public void Interact(PlayerInteract player)
     {
         GameProgressManager.instance.PlayerGetTesseract();
         LeaveInteract();

@@ -32,7 +32,7 @@ public class UiManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.E) && selectedReflector != null)
+        if (Input.GetKeyDown(KeyCode.E) && selectedReflector != null)
         {
             selectedReflector.LeaveInteract();
         }

@@ -9,35 +9,43 @@ public class ReflecteurMovable : MonoBehaviour, IInteractable
     public bool _isControlled;
     public int moveForce;
 
+    PlayerInteract _playerInteract;
+
     public bool isControlled()
     {
         return _isControlled;
     }
     public void IsInteractable(RaycastHit hit)
     {
-        if (hit.collider != null)
+        if (hit.collider != null && !_isControlled)
         {
             UiManager.instance.contectuelInteracted(contextuelTXT);
 
         }
     }
-    public void Interact()
+    public void Interact(PlayerInteract player)
     {
+        _playerInteract.isInteracting = true;
+        _playerInteract = player;
         _isControlled = true;
         RBPlayer.instance.LockMovements();
         UiManager.instance.selectedReflector = this;
-        UiManager.instance.Displaycontectuel();
+        UiManager.instance.Hidecontectuel();
         UiManager.instance.DisplayReflectorQuitText(true);
     }
 
     public void LeaveInteract()
     {
+
+        _playerInteract.isInteracting = false;
+        _playerInteract = null;
         _isControlled = false;
         UiManager.instance.selectedReflector = null;
         RBPlayer.instance.UnlockMovements();
-        UiManager.instance.Hidecontectuel();
+        UiManager.instance.Displaycontectuel();
         UiManager.instance.DisplayReflectorQuitText(false);
     }
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
