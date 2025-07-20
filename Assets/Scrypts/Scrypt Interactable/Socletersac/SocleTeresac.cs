@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class SocleTeresac : MonoBehaviour, IInteractable
 {
-
+    [SerializeField] string contextuelTXT_needTeserac;
     [SerializeField] string contextuelTXT_empty;
     [SerializeField] string contextuelTXT_full;
     [SerializeField] RayonEmission rayon;
@@ -21,20 +21,19 @@ public class SocleTeresac : MonoBehaviour, IInteractable
     }
     public void IsInteractable(RaycastHit hit)
     {
-        if (hit.collider != null)
+        if (hit.collider != null && !rayon.powered)
         {
-            if (!rayon.powered)
+            if (!rayon.powered && GameProgressManager.instance.HaveTesseract())
             {
                 UiManager.instance.contectuelInteracted(contextuelTXT_empty);
             }
-            if (rayon.powered)
+            else if (!rayon.powered && !GameProgressManager.instance.HaveTesseract())
             {
-                UiManager.instance.contectuelInteracted(contextuelTXT_full);
+                UiManager.instance.contectuelInteracted(contextuelTXT_needTeserac);
             }
-            
         }
     }
-    public void Interact()
+    public void Interact(PlayerInteract player)
     {
         Debug.Log("Interact SocleTeresac");
         if (!rayon.powered && GameProgressManager.instance.HaveTesseract())

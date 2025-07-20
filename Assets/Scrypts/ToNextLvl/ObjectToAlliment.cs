@@ -8,6 +8,7 @@ public class ObjectToAlliment : MonoBehaviour
 
     [SerializeField] Transform transformOn;
     [SerializeField] Transform transformOff;
+    [SerializeField] float timeToMove = 1;
 
     [SerializeField] ReccepteurRayon[] reccepteurRayons;
     // Start is called once before the first execution of Update after the MonoBehaviour is created  
@@ -24,12 +25,14 @@ public class ObjectToAlliment : MonoBehaviour
 
     public void SetPositionOn()
     {
-        transform.DOMove(transformOn.position, 3);
+        transform.DOMove(transformOn.position, timeToMove);
+        transform.DORotate(transformOn.rotation.eulerAngles, timeToMove);
     }
 
     public void SetPositionOff()
     {
-        transform.DOMove(transformOff.position, 3);
+        transform.DOMove(transformOff.position, timeToMove);
+        transform.DORotate(transformOff.rotation.eulerAngles, timeToMove);
     }
 
     public void CheckAllimentation()

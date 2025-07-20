@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class ReccepteurRayon : MonoBehaviour
 {
-    [SerializeField] ObjectToAlliment objectToAlliment;
+    [SerializeField] ObjectToAlliment[] objectToAlliments;
 
 
     [SerializeField] public bool powered;
@@ -31,12 +31,18 @@ public class ReccepteurRayon : MonoBehaviour
         if (powered)
         {
             renderer.material = materialON; // Change color to ON material when powered
-            objectToAlliment.CheckAllimentation();
+            for (int i = 0; i < objectToAlliments.Length; i++)
+            {
+                objectToAlliments[i].CheckAllimentation();
+            }
         }
         else
         {
             renderer.material = materialOFF; // Change color to OFF material when not powered
-            objectToAlliment.CheckAllimentation();
+            for (int i = 0; i < objectToAlliments.Length; i++)
+            {
+                objectToAlliments[i].CheckAllimentation();
+            }
         }
 
 

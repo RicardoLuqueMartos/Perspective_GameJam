@@ -13,6 +13,8 @@ public class ConsoleInteract : MonoBehaviour, IInteractable
     public int ReflectorIndex = 0;
 
     public bool _isControlled = false;
+
+    PlayerInteract _playerInteract;
     public bool isControlled()
     {
         return _isControlled;
@@ -28,17 +30,21 @@ public class ConsoleInteract : MonoBehaviour, IInteractable
         }
     }
 
-    public void Interact()
+    public void Interact(PlayerInteract player)
     {
      //   consoleUI.SetActive(true);
         UiManager.instance.OpenCameraConsole(this);
         _isControlled = true;
+        player.isInteracting = true;
+        _playerInteract = player;
     }
 
     public void LeaveInteract()
     {
     //    UiManager.instance.con.SetActive(false);
         _isControlled = false;
+        _playerInteract.isInteracting = false;
+        _playerInteract = null;
     }
     
 }
