@@ -25,8 +25,9 @@ public class ReflecteurMovable : MonoBehaviour, IInteractable
     }
     public void Interact(PlayerInteract player)
     {
-        _playerInteract.isInteracting = true;
+       
         _playerInteract = player;
+        player.isInteracting = true;
         _isControlled = true;
         RBPlayer.instance.LockMovements();
         UiManager.instance.selectedReflector = this;
