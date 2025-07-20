@@ -6,7 +6,7 @@ public interface IInteractable
     //method de detection par raycast
     public void IsInteractable(RaycastHit hit);
 
-    public void Interact();
+    public void Interact(PlayerInteract player = null);
 
     public void LeaveInteract();
 }

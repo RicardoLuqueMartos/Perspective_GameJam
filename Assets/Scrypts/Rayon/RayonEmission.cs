@@ -7,7 +7,6 @@ public class RayonEmission : MonoBehaviour
 {
     private LineRenderer rayonRenderer;
     private List<RaycastHit> hits = new List<RaycastHit>();
-    bool hasHitNotReflector = true;
     bool endWithOutHit;
     public bool powered;
     Vector3 directionWithOutHit;
@@ -29,7 +28,6 @@ public class RayonEmission : MonoBehaviour
         if (powered)
         {
             hits.Clear(); // Réinitialise la liste à chaque frame
-            hasHitNotReflector = true;
             endWithOutHit = false;
 
             Physics.Raycast(transform.position, transform.forward, out RaycastHit hit);
@@ -44,14 +42,12 @@ public class RayonEmission : MonoBehaviour
                 if (!hit.collider.CompareTag("Reflecteur"))
                 {
                     rayonRenderer.positionCount = 2;
-                    hasHitNotReflector = true;
                     rayonRenderer.SetPosition(0, transform.position);
                     rayonRenderer.SetPosition(1, hit.point);
                 }
                 else
                 {
                     hits.Add(hit);
-                    hasHitNotReflector = false;
                     endWithOutHit = false;
                     Vector3 currentDirection = transform.forward;
                     Vector3 currentHit = hit.point;
@@ -67,7 +63,6 @@ public class RayonEmission : MonoBehaviour
                         if (newhit.collider != null && !newhit.collider.CompareTag("Reflecteur"))
                         {
                             hits.Add(newhit);
-                            hasHitNotReflector = true;
                             break;
                         }
                         else if (newhit.collider != null && newhit.collider.CompareTag("Reflecteur"))
@@ -80,7 +75,6 @@ public class RayonEmission : MonoBehaviour
                         else if (newhit.collider == null)
                         {
                             directionWithOutHit = newDirection;
-                            hasHitNotReflector = true;
                             endWithOutHit = true;
                             break;
                         }
@@ -125,6 +119,7 @@ public class RayonEmission : MonoBehaviour
                         if (lastHitOnSurface.collider.GetComponent<ReccepteurRayon>())
                         { 
                             currentReccepteurRayon = lastHitOnSurface.collider.GetComponent<ReccepteurRayon>();
+                            if (!currentReccepteurRayon.powered)
                             currentReccepteurRayon.SetPowered(true);
                         }
                         else if (currentReccepteurRayon != null)
