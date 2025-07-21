@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UiManager : MonoBehaviour
@@ -8,15 +9,18 @@ public class UiManager : MonoBehaviour
 
     public static UiManager instance;
 
-    [SerializeField] private CameraConsole cameraConsole;
+    public CameraConsole cameraConsole;
     public ReflecteurMovable selectedReflector;
 
+
+    public GameObject GameMenuObject;
 
     public TMP_Text contextuelInteract;
     public GameObject RefectorQuitPanel;
 
     [SerializeField] Image tesseractImage;
     [SerializeField] public Image fadingPanel;
+
     void Start()
     {
         if (instance == null)
@@ -28,6 +32,8 @@ public class UiManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        HideMenu();
     }
 
     private void Update()
@@ -35,6 +41,12 @@ public class UiManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E) && selectedReflector != null)
         {
             selectedReflector.LeaveInteract();
+        }
+
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            if (GameMenuObject.activeInHierarchy) HideMenu();
+            else DisplayMenu();
         }
     }
 
@@ -78,4 +90,27 @@ public class UiManager : MonoBehaviour
         RefectorQuitPanel.SetActive(value);
     }
 
+
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
+    public void DisplayMenu()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        GameMenuObject.SetActive(true);
+    }
+
+    public void HideMenu()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        GameMenuObject.SetActive(false);
+    }
 }

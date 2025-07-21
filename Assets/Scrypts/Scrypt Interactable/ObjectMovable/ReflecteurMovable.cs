@@ -29,7 +29,7 @@ public class ReflecteurMovable : MonoBehaviour, IInteractable
         _playerInteract = player;
         player.isInteracting = true;
         _isControlled = true;
-        RBPlayer.instance.LockMovements();
+    //    RBPlayer.instance.LockMovements();
         UiManager.instance.selectedReflector = this;
         UiManager.instance.Hidecontectuel();
         UiManager.instance.DisplayReflectorQuitText(true);
@@ -42,8 +42,10 @@ public class ReflecteurMovable : MonoBehaviour, IInteractable
         _playerInteract = null;
         _isControlled = false;
         UiManager.instance.selectedReflector = null;
-        RBPlayer.instance.UnlockMovements();
+
+     //   RBPlayer.instance.UnlockMovements();
         UiManager.instance.Displaycontectuel();
+
         UiManager.instance.DisplayReflectorQuitText(false);
     }
 
