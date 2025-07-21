@@ -30,7 +30,7 @@ public class ReflecteurMovable : MonoBehaviour, IInteractable
         _playerInteract.isInteracting = true;
         _isControlled = true;
         Debug.Log(_isControlled);
-        RBPlayer.instance.LockMovements();
+    //    RBPlayer.instance.LockMovements();
 
         UiManager.instance.selectedReflector = this;
         UiManager.instance.Hidecontectuel();
