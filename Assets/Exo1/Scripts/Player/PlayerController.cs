@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -85,6 +86,7 @@ public class PlayerController : MonoBehaviour
             isJumping = false;
             animatorManager.animator.SetBool("IsDoubleJumping", false);
         }
+        animatorManager.animator.SetBool("IsGrounded", isOnGround);
         return isOnGround;
     }
 
@@ -111,10 +113,9 @@ public class PlayerController : MonoBehaviour
         if (IsInteracting)
             return;
 
-     /*   if (IsGrounded())
+        if (IsGrounded())
         {
-            isJumping = false;
-        }*/
+        }
 
 
         float sprintValue = 1;
@@ -187,8 +188,9 @@ public class PlayerController : MonoBehaviour
     }
     void SendDoubleJumpToAnimator()
     {
+        Debug.Log("SendDoubleJumpToAnimator");
         animatorManager.animator.SetBool("IsDoubleJumping", true);
-    //    animatorManager.PlayTargetAnimation("DoubleJump", false);
+        animatorManager.PlayTargetAnimation("DoubleJump", false);
     }
     void SendRunJumpToAnimator()
     {
@@ -199,6 +201,7 @@ public class PlayerController : MonoBehaviour
     void SendJumpToAnimator()
     {
         CanWalk = false;
+        animatorManager.animator.SetBool("IsGrounded", false);
         animatorManager.animator.SetBool("Jumping", true);
         animatorManager.PlayTargetAnimation("Jump_Run", false, false);
     }
@@ -211,5 +214,30 @@ public class PlayerController : MonoBehaviour
 
         else
             isSprinting = false;
+    }
+
+    public void KillPlayer()
+    {
+        StartCoroutine(FadeOutToRespawn());
+    }
+    public IEnumerator FadeOutToRespawn()
+    {
+        UiManager.instance.fadingPanel.enabled = true;
+        UiManager.instance.fadingPanel.DOFade(1, 1);
+        yield return new WaitForSeconds(2);
+
+        // Désactivation du CharacterController avant de déplacer le joueur
+        var controller = PlayerController.instance;
+        if (controller != null) controller.enabled = false;
+
+        PlayerController.instance.gameObject.transform.position = GameProgressManager.instance.currentRespawnTransform.position;
+
+        // Réactivation du CharacterController après le déplacement
+        if (controller != null) controller.enabled = true;
+
+        UiManager.instance.fadingPanel.DOFade(0, 2);
+        yield return new WaitForSeconds(2);
+        UiManager.instance.fadingPanel.enabled = false;
+        yield break;
     }
 }

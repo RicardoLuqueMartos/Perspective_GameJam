@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.UI.Image;
 
@@ -39,7 +40,13 @@ public class RayonEmission : MonoBehaviour
             }
             else
             {
-                if (!hit.collider.CompareTag("Reflecteur"))
+                if (hit.collider.CompareTag("Player"))
+                {
+                    Debug.Log("Rayon hit & kill Player");
+                    PlayerController.instance.KillPlayer();
+                    return;
+                }
+                else if(!hit.collider.CompareTag("Reflecteur"))
                 {
                     rayonRenderer.positionCount = 2;
                     rayonRenderer.SetPosition(0, transform.position);
@@ -60,7 +67,7 @@ public class RayonEmission : MonoBehaviour
                         Vector3 startPoint = lastHit.point + newDirection * 0.01f; // Offset pour éviter le décalage
                         Physics.Raycast(startPoint, newDirection, out RaycastHit newhit);
                         //Debug.DrawRay(lastHit.point, lastHit.normal, Color.red, 2f);
-                        if (newhit.collider != null && !newhit.collider.CompareTag("Reflecteur"))
+                       if (newhit.collider != null && !newhit.collider.CompareTag("Reflecteur"))
                         {
                             hits.Add(newhit);
                             break;
@@ -72,6 +79,7 @@ public class RayonEmission : MonoBehaviour
                             currentDirection = newDirection;
                             lastHit = newhit;
                         }
+
                         else if (newhit.collider == null)
                         {
                             directionWithOutHit = newDirection;
@@ -127,15 +135,18 @@ public class RayonEmission : MonoBehaviour
                             currentReccepteurRayon.SetPowered(false);
                             currentReccepteurRayon = null;
                         }
-
                     }
-
-
                 }
             }
-
-            if (!endWithOutHit && hits.Count > 0)
-                Debug.Log("Rayon ending on " + hits[hits.Count - 1].collider.name);
+            if (!endWithOutHit && hits.Count > 0) {
+                if (hits[hits.Count - 1].collider.CompareTag("Player"))
+                {
+                    Debug.Log("Rayon hits & kills Player");
+                    PlayerController.instance.KillPlayer();
+                    return;
+                }
+                else Debug.Log("Rayon ending on " + hits[hits.Count - 1].collider.name);
+            }
             else
                 Debug.Log("RayonRenderer has no hits, setting to default length.");
         }

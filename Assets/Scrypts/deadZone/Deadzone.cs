@@ -25,28 +25,9 @@ public class Deadzone : MonoBehaviour
         }
         if (other.gameObject.CompareTag("Player"))
         {
-            StartCoroutine(FadeOutToRespawn());
+            PlayerController.instance.KillPlayer();
         }
     }
 
-    public IEnumerator FadeOutToRespawn()
-    {
-        UiManager.instance.fadingPanel.enabled = true;
-        UiManager.instance.fadingPanel.DOFade(1, 1);
-        yield return new WaitForSeconds(2);
-
-        // Désactivation du CharacterController avant de déplacer le joueur
-        var controller = RBPlayer.instance.GetComponent<CharacterController>();
-        if (controller != null) controller.enabled = false;
-
-        RBPlayer.instance.gameObject.transform.position = GameProgressManager.instance.currentRespawnTransform.position;
-
-        // Réactivation du CharacterController après le déplacement
-        if (controller != null) controller.enabled = true;
-
-        UiManager.instance.fadingPanel.DOFade(0, 2);
-        yield return new WaitForSeconds(2);
-        UiManager.instance.fadingPanel.enabled = false;
-        yield break;
-    }
+    
 }

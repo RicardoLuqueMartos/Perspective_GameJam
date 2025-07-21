@@ -102,15 +102,7 @@ public class CameraOrbit : MonoBehaviour
 
     public void HandleCameraFollowBackMovement()
     {
-        if (PlayerController.instance.cameraType == PlayerController.CameraTypeEnum.CameraFollowPlayer)
-        {
-            cameraFollowBack.FollowTarget();
-            cameraFollowBack.HandleCameraBackCollisions();
-        }
-        else if (PlayerController.instance.cameraType == PlayerController.CameraTypeEnum.Advanced)
-        {
-            cameraFollowBack.FollowTarget();
-            cameraFollowBack.HandleCameraBackCollisions();
-        }
+        cameraFollowBack.FollowTarget();
+        cameraFollowBack.HandleCameraBackCollisions();        
     }
 }
