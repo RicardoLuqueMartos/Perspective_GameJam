@@ -20,6 +20,8 @@ public class UiManager : MonoBehaviour
 
     [SerializeField] Image tesseractImage;
     [SerializeField] public Image fadingPanel;
+    public TMP_Text tesseractAmount;
+
 
     void Start()
     {
@@ -67,20 +69,25 @@ public class UiManager : MonoBehaviour
 
     public void OpenCameraConsole(ConsoleInteract consoleInteract)
     {
+        Hidecontectuel();
         cameraConsole.OpenCameraConsole(consoleInteract);
     }
 
-    public void DisplayTesseract(bool value)
+    public void DisplayTesseract(bool value, int amount)
     {
+        tesseractAmount.text = amount.ToString();
+        if(amount > 1) tesseractAmount.transform.parent.gameObject.SetActive(true); 
+        else tesseractAmount.transform.parent.gameObject.SetActive(false);
         tesseractImage.sprite = gameSettingsData.tesseractSprite;
-        tesseractImage.gameObject.SetActive(value);
+        tesseractImage.transform.parent.gameObject.SetActive(value);
+        Hidecontectuel();
     }
 
     bool CanDisplayContextuel()
     {
         bool response = true;
         if (cameraConsole.gameObject.activeInHierarchy
-            && selectedReflector != null) response = false;
+            || selectedReflector != null) response = false;
 
         return response;
     }

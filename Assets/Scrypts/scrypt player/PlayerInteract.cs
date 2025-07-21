@@ -39,7 +39,7 @@ public class PlayerInteract : MonoBehaviour
                     }
                 }
             }
-
+            else UiManager.instance.Hidecontectuel();
         }
         else if (UiManager.instance != null && !isInteracting)
         {

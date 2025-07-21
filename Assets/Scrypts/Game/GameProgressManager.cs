@@ -48,19 +48,22 @@ public class GameProgressManager : MonoBehaviour
 
     public void PlayerGetTesseract()
     {
+        Debug.Log("PlayerGetTesseract " + tesseractAmount);
         tesseractAmount++;
         ManageTesseractDisplay();
     }
 
     public void PlayerUseTesseract()
     {
+        Debug.Log("PlayerUseTesseract "+ tesseractAmount);
         tesseractAmount--;
         ManageTesseractDisplay();
     }
 
     public void ManageTesseractDisplay()
     {
-        UiManager.instance.DisplayTesseract(HaveTesseract());
+        Debug.Log("ManageTesseractDisplay "+ tesseractAmount);
+        UiManager.instance.DisplayTesseract(HaveTesseract(), tesseractAmount);
     }
 
     public bool HaveTesseract()

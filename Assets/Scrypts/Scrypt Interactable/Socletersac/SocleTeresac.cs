@@ -40,8 +40,8 @@ public class SocleTeresac : MonoBehaviour, IInteractable
         {
             GameProgressManager.instance.PlayerUseTesseract();
  
-                teresac = Instantiate(GameProgressManager.instance.prefabTeresac, socleTeresac.position, Quaternion.identity);
-                teresac.transform.SetParent(socleTeresac);
+            teresac = Instantiate(GameProgressManager.instance.prefabTeresac, socleTeresac.position, Quaternion.identity);
+            teresac.transform.SetParent(socleTeresac);
 
             rayon.TurnOn();
          }
@@ -70,7 +70,7 @@ public class SocleTeresac : MonoBehaviour, IInteractable
         if (teresac == null && rayon.powered)
         {
             rayon.powered = false;
-            GameProgressManager.instance.PlayerGetTesseract();
+        //    GameProgressManager.instance.PlayerGetTesseract();
             rayon.TurnOff();
         }
 

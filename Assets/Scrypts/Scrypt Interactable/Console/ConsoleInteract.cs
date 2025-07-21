@@ -20,8 +20,6 @@ public class ConsoleInteract : MonoBehaviour, IInteractable
         return _isControlled;
     }
 
-
-
     public void IsInteractable(RaycastHit hit)
     {
         if (hit.collider != null)
