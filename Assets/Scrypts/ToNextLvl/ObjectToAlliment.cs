@@ -10,7 +10,8 @@ public class ObjectToAlliment : MonoBehaviour
     [SerializeField] Transform transformOn;
     [SerializeField] Transform transformOff;
     [SerializeField] float timeToMove = 1;
-    [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioSource audioSourceON;
+    [SerializeField] AudioSource audioSourceOFF;
 
     bool moving;
 
@@ -28,22 +29,37 @@ public class ObjectToAlliment : MonoBehaviour
 
     public void SetPositionOn()
     {
-        if (!audioSource.isPlaying)
-            SoundLauncher.instance.PlayStructureMove(audioSource);
+        if (audioSourceOFF.isPlaying)
+            {
+            audioSourceOFF.Stop();
+            }
+        if (!audioSourceON.isPlaying)
+        {
+            SoundLauncher.instance.PlayStructureMove(audioSourceON);
+
+        }
         transform.DOMove(transformOn.position, timeToMove)
-            .OnComplete(() => audioSource.Stop());
+            .OnComplete(() => audioSourceON.Stop());
         transform.DORotate(transformOn.rotation.eulerAngles, timeToMove)
-            .OnComplete(() => audioSource.Stop());
+            .OnComplete(() => audioSourceON.Stop());
     }
 
     public void SetPositionOff()
     {
-        if (!audioSource.isPlaying)
-            SoundLauncher.instance.PlayStructureMove(audioSource);
+        if (audioSourceON.isPlaying)
+        {
+            audioSourceON.Stop();
+        }
+        if (!audioSourceOFF.isPlaying)
+        { 
+            SoundLauncher.instance.PlayStructureMove(audioSourceOFF); 
+        
+        }
+            
         transform.DOMove(transformOff.position, timeToMove)
-            .OnComplete(() => audioSource.Stop());
+            .OnComplete(() => audioSourceOFF.Stop());
         transform.DORotate(transformOff.rotation.eulerAngles, timeToMove)
-            .OnComplete(() => audioSource.Stop());
+            .OnComplete(() => audioSourceOFF.Stop());
     }
 
     public void CheckAllimentation()
