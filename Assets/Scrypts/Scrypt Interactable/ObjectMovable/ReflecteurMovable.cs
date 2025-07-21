@@ -25,11 +25,13 @@ public class ReflecteurMovable : MonoBehaviour, IInteractable
     }
     public void Interact(PlayerInteract player)
     {
-       
+       Debug.Log("Interact ReflecteurMovable");
         _playerInteract = player;
-        player.isInteracting = true;
+        _playerInteract.isInteracting = true;
         _isControlled = true;
-    //    RBPlayer.instance.LockMovements();
+        Debug.Log(_isControlled);
+        RBPlayer.instance.LockMovements();
+
         UiManager.instance.selectedReflector = this;
         UiManager.instance.Hidecontectuel();
         UiManager.instance.DisplayReflectorQuitText(true);
@@ -37,7 +39,7 @@ public class ReflecteurMovable : MonoBehaviour, IInteractable
 
     public void LeaveInteract()
     {
-
+        Debug.Log("Leave Interact ReflecteurMovable");
         _playerInteract.isInteracting = false;
         _playerInteract = null;
         _isControlled = false;
@@ -91,15 +93,17 @@ public class ReflecteurMovable : MonoBehaviour, IInteractable
     public void RotateLeft()
     {
         cylindrePivot.gameObject.transform.Rotate(0, -moveForce * Time.deltaTime, 0);
+        SoundLauncher.instance.PlayTurrentMove();
     }
 
     public void RotateRight()
     {
         cylindrePivot.gameObject.transform.Rotate(0, moveForce * Time.deltaTime, 0);
+        SoundLauncher.instance.PlayTurrentMove();
     }
     public void RotateUp()
     {
-        // Pour gérer les angles négatifs
+        // Pour gÃ©rer les angles nÃ©gatifs
 
         float currentZ = sphereInclinaison.transform.localEulerAngles.z;
         if (currentZ > 180) currentZ -= 360;
@@ -109,11 +113,12 @@ public class ReflecteurMovable : MonoBehaviour, IInteractable
             sphereInclinaison.transform.localEulerAngles.y,
             newZ
         );
+        SoundLauncher.instance.PlayTurrentMove();
     }
 
     public void RotateDown()
     {
-        // Pour gérer les angles négatifs
+        // Pour gÃ©rer les angles nÃ©gatifs
 
         float currentZ = sphereInclinaison.transform.localEulerAngles.z;
         if (currentZ > 180) currentZ -= 360;
@@ -123,5 +128,6 @@ public class ReflecteurMovable : MonoBehaviour, IInteractable
             sphereInclinaison.transform.localEulerAngles.y,
             newZ
         );
+        SoundLauncher.instance.PlayTurrentMove();
     }
 }

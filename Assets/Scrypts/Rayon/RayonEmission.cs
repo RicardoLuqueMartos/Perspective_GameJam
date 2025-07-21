@@ -145,6 +145,7 @@ public class RayonEmission : MonoBehaviour
     {
         powered = true ;
         rayonRenderer.enabled = true;
+        SoundLauncher.instance.PlayAltarPowerOn();
     }
 
     public void TurnOff()
@@ -157,5 +158,6 @@ public class RayonEmission : MonoBehaviour
         }
         // Pour désactiver le LineRenderer, il faut utiliser la propriété 'enabled' (avec un 'd' minuscule) :
         rayonRenderer.enabled = false; // Réinitialise le LineRenderer
+        SoundLauncher.instance.PlayAltarPowerOff();
     }
 }

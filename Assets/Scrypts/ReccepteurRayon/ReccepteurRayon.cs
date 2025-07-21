@@ -31,6 +31,7 @@ public class ReccepteurRayon : MonoBehaviour
         if (powered)
         {
             renderer.material = materialON; // Change color to ON material when powered
+            SoundLauncher.instance.PlayRecepteurPowerOn();
             for (int i = 0; i < objectToAlliments.Length; i++)
             {
                 objectToAlliments[i].CheckAllimentation();
