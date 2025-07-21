@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Reflecteur
   - Teserac
+  - RemoteCamera
   layers:
   - Default
   - TransparentFX
@@ -13,7 +14,7 @@ TagManager:
   - Interractable
   - Water
   - UI
-  - 
+  - Ground
   - 
   - 
   - 

@@ -6,10 +6,12 @@ public class CameraOrbit : MonoBehaviour
     [SerializeField] Transform playerTransform;
     [SerializeField] Transform cameraParentTransform;
 
+    public CameraFollowBack cameraFollowBack;
+
     [SerializeField] float mouseX = 0.0f;
     [SerializeField] float mouseY = 0.0f;
-    float x = 0.0f;
-    float y = 0.0f;
+    public float x = 0.0f;
+    public float y = 0.0f;
     
     [SerializeField]
     private float xSpeed = 250.0f;
@@ -31,6 +33,15 @@ public class CameraOrbit : MonoBehaviour
 
     [SerializeField]
     private Transform cameraPivotVertical;
+    Transform cameraTransform;
+    private float defaultPosition;
+
+    private void Awake()
+    {
+        cameraTransform = Camera.main.transform;
+        cameraFollowBack = cameraTransform.GetComponent<CameraFollowBack>();
+        defaultPosition = cameraTransform.localPosition.z;
+    }
 
     void Update()
     {
@@ -40,8 +51,6 @@ public class CameraOrbit : MonoBehaviour
             RotateCamera();
             if (UiManager.instance.selectedReflector == null) MoveCamera();
         }
-        
-
     }
 
     private void OnLook(InputValue Value)
@@ -89,5 +98,19 @@ public class CameraOrbit : MonoBehaviour
     public void PlayerMoveInCameraDirection()
     {
         playerTransform.LookAt(aimingObject);
+    }
+
+    public void HandleCameraFollowBackMovement()
+    {
+        if (PlayerController.instance.cameraType == PlayerController.CameraTypeEnum.CameraFollowPlayer)
+        {
+            cameraFollowBack.FollowTarget();
+            cameraFollowBack.HandleCameraBackCollisions();
+        }
+        else if (PlayerController.instance.cameraType == PlayerController.CameraTypeEnum.Advanced)
+        {
+            cameraFollowBack.FollowTarget();
+            cameraFollowBack.HandleCameraBackCollisions();
+        }
     }
 }

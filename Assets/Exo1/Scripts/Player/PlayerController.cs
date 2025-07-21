@@ -37,7 +37,28 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     AnimatorManager animatorManager;
     public bool UsingRootMotion = false;
-  
+    public enum CameraTypeEnum { CameraFollowPlayer, PlayerFollowCamera, Advanced, other }
+    public CameraTypeEnum cameraType = new CameraTypeEnum();
+    public bool LockedCamera = false;
+    public static PlayerController instance;
+    #region Init
+    private void Awake()
+    {
+        CreateInstance();
+    }
+
+    void CreateInstance()
+    {
+        if (instance != null && instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            instance = this;
+        }
+    }
+    #endregion Init
     private void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
@@ -47,6 +68,12 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {   
         MovePlayer();
+
+        if (!LockedCamera)
+        {
+            cameraOrbit.HandleCameraFollowBackMovement();
+
+        }
     }
     
     bool IsGrounded()
