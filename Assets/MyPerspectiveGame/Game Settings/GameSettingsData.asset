@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17ebc89250e55544ca84a64d360a8dd3, type: 3}
   m_Name: GameSettingsData
   m_EditorClassIdentifier: 
-  tesseractSprite: {fileID: 21300000, guid: 4323f367dbeb21f49953fd80b9f705cb, type: 3}
+  tesseractSprite: {fileID: 21300000, guid: df227943114bc8e4c804638ba06e502f, type: 3}
