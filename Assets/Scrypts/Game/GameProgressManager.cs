@@ -50,6 +50,7 @@ public class GameProgressManager : MonoBehaviour
     {
         tesseractAmount++;
         ManageTesseractDisplay();
+        SoundLauncher.instance.PlayPickUpItem();
     }
 
     public void PlayerUseTesseract()

@@ -25,10 +25,11 @@ public class ReflecteurMovable : MonoBehaviour, IInteractable
     }
     public void Interact(PlayerInteract player)
     {
-       
+       Debug.Log("Interact ReflecteurMovable");
         _playerInteract = player;
-        player.isInteracting = true;
+        _playerInteract.isInteracting = true;
         _isControlled = true;
+        Debug.Log(_isControlled);
         RBPlayer.instance.LockMovements();
         UiManager.instance.selectedReflector = this;
         UiManager.instance.Hidecontectuel();
@@ -37,7 +38,7 @@ public class ReflecteurMovable : MonoBehaviour, IInteractable
 
     public void LeaveInteract()
     {
-
+        Debug.Log("Leave Interact ReflecteurMovable");
         _playerInteract.isInteracting = false;
         _playerInteract = null;
         _isControlled = false;
@@ -89,11 +90,13 @@ public class ReflecteurMovable : MonoBehaviour, IInteractable
     public void RotateLeft()
     {
         cylindrePivot.gameObject.transform.Rotate(0, -moveForce * Time.deltaTime, 0);
+        SoundLauncher.instance.PlayTurrentMove();
     }
 
     public void RotateRight()
     {
         cylindrePivot.gameObject.transform.Rotate(0, moveForce * Time.deltaTime, 0);
+        SoundLauncher.instance.PlayTurrentMove();
     }
     public void RotateUp()
     {
@@ -107,6 +110,7 @@ public class ReflecteurMovable : MonoBehaviour, IInteractable
             sphereInclinaison.transform.localEulerAngles.y,
             newZ
         );
+        SoundLauncher.instance.PlayTurrentMove();
     }
 
     public void RotateDown()
@@ -121,5 +125,6 @@ public class ReflecteurMovable : MonoBehaviour, IInteractable
             sphereInclinaison.transform.localEulerAngles.y,
             newZ
         );
+        SoundLauncher.instance.PlayTurrentMove();
     }
 }

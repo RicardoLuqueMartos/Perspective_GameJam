@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System.Linq;
 using UnityEngine;
+using static Unity.VisualScripting.Member;
 
 public class ObjectToAlliment : MonoBehaviour
 {
@@ -9,6 +10,9 @@ public class ObjectToAlliment : MonoBehaviour
     [SerializeField] Transform transformOn;
     [SerializeField] Transform transformOff;
     [SerializeField] float timeToMove = 1;
+    [SerializeField] AudioSource audioSource;
+
+    bool moving;
 
     [SerializeField] ReccepteurRayon[] reccepteurRayons;
     // Start is called once before the first execution of Update after the MonoBehaviour is created  
@@ -20,19 +24,26 @@ public class ObjectToAlliment : MonoBehaviour
     // Update is called once per frame  
     void Update()
     {
-
     }
 
     public void SetPositionOn()
     {
-        transform.DOMove(transformOn.position, timeToMove);
-        transform.DORotate(transformOn.rotation.eulerAngles, timeToMove);
+        if (!audioSource.isPlaying)
+            SoundLauncher.instance.PlayStructureMove(audioSource);
+        transform.DOMove(transformOn.position, timeToMove)
+            .OnComplete(() => audioSource.Stop());
+        transform.DORotate(transformOn.rotation.eulerAngles, timeToMove)
+            .OnComplete(() => audioSource.Stop());
     }
 
     public void SetPositionOff()
     {
-        transform.DOMove(transformOff.position, timeToMove);
-        transform.DORotate(transformOff.rotation.eulerAngles, timeToMove);
+        if (!audioSource.isPlaying)
+            SoundLauncher.instance.PlayStructureMove(audioSource);
+        transform.DOMove(transformOff.position, timeToMove)
+            .OnComplete(() => audioSource.Stop());
+        transform.DORotate(transformOff.rotation.eulerAngles, timeToMove)
+            .OnComplete(() => audioSource.Stop());
     }
 
     public void CheckAllimentation()

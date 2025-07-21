@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94d76d780f9c4b74588c8e569f9afe30, type: 3}
+  m_Name: SoundData
+  m_EditorClassIdentifier: 
+  clicksBoutton:
+  - {fileID: 8300000, guid: 677cdc5945cb08445a71b4c830085c58, type: 3}
+  - {fileID: 8300000, guid: 66686499bf4834444a04adf03b6f2a86, type: 3}
+  - {fileID: 8300000, guid: 2442bc86ca237664c9ce90759a9508aa, type: 3}
+  - {fileID: 8300000, guid: 38159f92d5bc8834f8ed5fc5f3ae8867, type: 3}
+  clickBouttonFail:
+  - {fileID: 8300000, guid: ee3f298a348102d488862fc2784e52af, type: 3}
+  - {fileID: 8300000, guid: 5fd009464891de24bbdbaaf161ccb808, type: 3}
+  - {fileID: 8300000, guid: bbbaed479a054e94386eac9bb039ce25, type: 3}
+  - {fileID: 8300000, guid: 361f764d2c6384949870e54928e4b28c, type: 3}
+  - {fileID: 8300000, guid: 8bd0f3e25d58fa54d920ec6d7fda303a, type: 3}
+  pickUpItem:
+  - {fileID: 8300000, guid: 2947c68e5bf01a84591f6698661cde6c, type: 3}
+  - {fileID: 8300000, guid: d37dba235479eb24e9c9a751917c6c6c, type: 3}
+  - {fileID: 8300000, guid: f64b626a87bc87548b74583c74d863d1, type: 3}
+  altarPowerOn:
+  - {fileID: 8300000, guid: 592e6df93258d024e8a39f7e4853f76a, type: 3}
+  altarPowerOff:
+  - {fileID: 8300000, guid: 568448a66f9371f44b8e8ab3d3f84769, type: 3}
+  recepteurPowerOn:
+  - {fileID: 8300000, guid: a98e90582bf1b1442bbdb34aca6158c1, type: 3}
+  - {fileID: 8300000, guid: 166a0e7a5d959ed448b893b5bd4f9fb6, type: 3}
+  recepteurPowerOff:
+  - {fileID: 8300000, guid: 2f8be899b030baa4e953b7295456bd25, type: 3}
+  structureMove: {fileID: 8300000, guid: e374c23607b343d4ebdd07e2f9e376c9, type: 3}
+  turrentMove: {fileID: 8300000, guid: 6dedb6ff7e40e7f499815ef0d4d4b558, type: 3}
