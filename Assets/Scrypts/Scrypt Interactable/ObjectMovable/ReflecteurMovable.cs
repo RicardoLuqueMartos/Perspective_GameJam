@@ -31,6 +31,7 @@ public class ReflecteurMovable : MonoBehaviour, IInteractable
         _isControlled = true;
         Debug.Log(_isControlled);
         RBPlayer.instance.LockMovements();
+
         UiManager.instance.selectedReflector = this;
         UiManager.instance.Hidecontectuel();
         UiManager.instance.DisplayReflectorQuitText(true);
@@ -43,8 +44,10 @@ public class ReflecteurMovable : MonoBehaviour, IInteractable
         _playerInteract = null;
         _isControlled = false;
         UiManager.instance.selectedReflector = null;
-        RBPlayer.instance.UnlockMovements();
+
+     //   RBPlayer.instance.UnlockMovements();
         UiManager.instance.Displaycontectuel();
+
         UiManager.instance.DisplayReflectorQuitText(false);
     }
 
@@ -100,7 +103,7 @@ public class ReflecteurMovable : MonoBehaviour, IInteractable
     }
     public void RotateUp()
     {
-        // Pour gérer les angles négatifs
+        // Pour gÃ©rer les angles nÃ©gatifs
 
         float currentZ = sphereInclinaison.transform.localEulerAngles.z;
         if (currentZ > 180) currentZ -= 360;
@@ -115,7 +118,7 @@ public class ReflecteurMovable : MonoBehaviour, IInteractable
 
     public void RotateDown()
     {
-        // Pour gérer les angles négatifs
+        // Pour gÃ©rer les angles nÃ©gatifs
 
         float currentZ = sphereInclinaison.transform.localEulerAngles.z;
         if (currentZ > 180) currentZ -= 360;

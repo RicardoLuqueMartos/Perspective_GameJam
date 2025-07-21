@@ -1,0 +1,116 @@
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+public class CameraOrbit : MonoBehaviour
+{
+    [SerializeField] Transform playerTransform;
+    [SerializeField] Transform cameraParentTransform;
+
+    public CameraFollowBack cameraFollowBack;
+
+    [SerializeField] float mouseX = 0.0f;
+    [SerializeField] float mouseY = 0.0f;
+    public float x = 0.0f;
+    public float y = 0.0f;
+    
+    [SerializeField]
+    private float xSpeed = 250.0f;
+    [SerializeField]
+    private float ySpeed = 120.0f;
+
+    [SerializeField]
+    private float yMinLimit = -20;
+    [SerializeField]
+    private float yMaxLimit = 80;
+
+    [SerializeField]
+    private float xMinLimit = -35;
+    [SerializeField]
+    private float xMaxLimit = 35;
+  
+    [SerializeField]
+    private Transform aimingObject;
+
+    [SerializeField]
+    private Transform cameraPivotVertical;
+    Transform cameraTransform;
+    private float defaultPosition;
+
+    private void Awake()
+    {
+        cameraTransform = Camera.main.transform;
+        cameraFollowBack = cameraTransform.GetComponent<CameraFollowBack>();
+        defaultPosition = cameraTransform.localPosition.z;
+    }
+
+    void Update()
+    {
+        if (UiManager.instance.cameraConsole.gameObject.activeInHierarchy == false
+            && UiManager.instance.GameMenuObject.activeInHierarchy == false)
+        {
+            RotateCamera();
+            if (UiManager.instance.selectedReflector == null) MoveCamera();
+        }
+    }
+
+    private void OnLook(InputValue Value)
+    {
+        Vector2 vector = Value.Get<Vector2>();
+        mouseX = vector.x;
+        mouseY = vector.y;
+    }
+
+    private void MoveCamera()
+    {
+        cameraParentTransform.position = new Vector3(playerTransform.position.x,
+            playerTransform.position.y,
+            playerTransform.position.z);
+
+    }
+
+    private void RotateCamera()
+    {
+        // get position gape between Mouse X and Mouse Y on screen points every frame 
+        x += mouseX * xSpeed * 0.02f;
+        y -= mouseY * ySpeed * 0.02f;
+
+    //    x = ClampAngle(x, xMinLimit, xMaxLimit);
+        y = ClampAngle(y, yMinLimit, yMaxLimit);
+
+        var rotationHorizontal = Quaternion.Euler(cameraParentTransform.rotation.y, x, 0);
+        var rotationVertical = Quaternion.Euler(y, cameraPivotVertical.localRotation.x, 0);
+
+        cameraPivotVertical.localRotation = rotationVertical;
+        cameraParentTransform.rotation = rotationHorizontal;
+    }
+    float ClampAngle(float angle, float min, float max)
+    {
+        // limit the canera angle values to - and + 360 degrees
+        if (angle < -360)
+            angle += 360;
+        if (angle > 360)
+            angle -= 360;
+
+        // return camera rotation depending on min and max values 
+        return Mathf.Clamp(angle, min, max);
+    }
+
+    public void PlayerMoveInCameraDirection()
+    {
+        playerTransform.LookAt(aimingObject);
+    }
+
+    public void HandleCameraFollowBackMovement()
+    {
+        if (PlayerController.instance.cameraType == PlayerController.CameraTypeEnum.CameraFollowPlayer)
+        {
+            cameraFollowBack.FollowTarget();
+            cameraFollowBack.HandleCameraBackCollisions();
+        }
+        else if (PlayerController.instance.cameraType == PlayerController.CameraTypeEnum.Advanced)
+        {
+            cameraFollowBack.FollowTarget();
+            cameraFollowBack.HandleCameraBackCollisions();
+        }
+    }
+}
