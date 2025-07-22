@@ -47,23 +47,8 @@ public class UiManager : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.Escape))
         {
-            if (!CameraConsole.instance.gameObject.activeInHierarchy)
-            {
-                if (GameMenuObject.activeInHierarchy)
-                {
-                    HideMenu();
-
-                }
-                else
-                {
-                    DisplayMenu();
-
-                }
-            }
-            else
-            {
-                CameraConsole.instance.ExitConsole();
-            }
+            if (GameMenuObject.activeInHierarchy) HideMenu();
+            else DisplayMenu();
         }
     }
 
@@ -117,7 +102,6 @@ public class UiManager : MonoBehaviour
     public void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        
     }
 
     public void QuitGame()
@@ -127,14 +111,12 @@ public class UiManager : MonoBehaviour
 
     public void DisplayMenu()
     {
-        SoundLauncher.instance.PlayClickButton();
         Cursor.lockState = CursorLockMode.None;
         GameMenuObject.SetActive(true);
     }
 
     public void HideMenu()
     {
-        SoundLauncher.instance.PlayClickButtonFail();
         Cursor.lockState = CursorLockMode.Locked;
         GameMenuObject.SetActive(false);
     }

@@ -33,7 +33,7 @@ public class ReflecteurMovable : MonoBehaviour, IInteractable
         _playerInteract.isInteracting = true;
         _playerInteract.interactingTarget = this;
         _isControlled = true;
-        SoundLauncher.instance.PlayClickButton();
+
         UiManager.instance.selectedReflector = this;
         UiManager.instance.Hidecontectuel();
         UiManager.instance.DisplayReflectorQuitText(true);
@@ -47,8 +47,8 @@ public class ReflecteurMovable : MonoBehaviour, IInteractable
         _playerInteract.interactingTarget = null;
         _isControlled = false;
         UiManager.instance.selectedReflector = null;
-        SoundLauncher.instance.PlayClickButtonFail();
-        //   RBPlayer.instance.UnlockMovements();
+
+     //   RBPlayer.instance.UnlockMovements();
         UiManager.instance.Displaycontectuel();
 
         UiManager.instance.DisplayReflectorQuitText(false);

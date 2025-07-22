@@ -63,7 +63,6 @@ public class CameraConsole : MonoBehaviour
     {
         consoleInteract = _consoleInteract;
         gameObject.SetActive(true);
-        SoundLauncher.instance.PlayClickButton();
     }
 
     #region Camera view
@@ -133,20 +132,17 @@ public class CameraConsole : MonoBehaviour
     {
         consoleInteract.cameraIndex = (consoleInteract.cameraIndex + 1) % consoleInteract.camerasList.Count;
         SetCameraDisplay();
-        SoundLauncher.instance.PlayClickButton();
     }
 
     public void PreviousCam()
     {
         consoleInteract.cameraIndex = (consoleInteract.cameraIndex - 1 + consoleInteract.camerasList.Count) % consoleInteract.camerasList.Count;
         SetCameraDisplay();
-        SoundLauncher.instance.PlayClickButton();
     }
     #endregion Camera selection
 
     public void ExitConsole()
     {
         gameObject.SetActive(false);
-        SoundLauncher.instance.PlayClickButtonFail();
     }
 }

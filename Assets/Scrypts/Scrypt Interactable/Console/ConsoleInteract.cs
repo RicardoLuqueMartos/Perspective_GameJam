@@ -51,7 +51,6 @@ public class ConsoleInteract : MonoBehaviour, IInteractable
         _playerInteract.isInteracting = false;
         _playerInteract.interactingTarget = null;
         _playerInteract = null;
-        CameraConsole.instance.ExitConsole();
     }
 
     void GenerateFirstCameraView()
