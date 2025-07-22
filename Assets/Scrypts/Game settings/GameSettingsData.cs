@@ -9,6 +9,9 @@ public class GameSettingsData : ScriptableObject
     public Sprite tesseractSprite;
 
     public int ReflectorMoveForce = 10;
+    [Header("Console texture Settings")]
+    public Sprite ConsoleWithReflectorsImage;
+    public Sprite ConsoleWithoutReflectorsImage;
 
     [Header("RenderTexture Settings")]
     public int renderTextureCurrentSizeX = 854;
@@ -16,4 +19,5 @@ public class GameSettingsData : ScriptableObject
     public FilterMode m_filterMode = FilterMode.Point;
     public GraphicsFormat format = GraphicsFormat.R8G8B8A8_UNorm;
     public GraphicsFormat depthFormat = GraphicsFormat.D32_SFloat_S8_UInt;
+
 }

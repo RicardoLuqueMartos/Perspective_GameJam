@@ -17,6 +17,7 @@ public class ConsoleInteract : MonoBehaviour, IInteractable
 
     PlayerInteract _playerInteract;
     public RawImage ConsoleCamImage;
+    public Image ConsoleImage;
 
     void OnEnable()
     {
@@ -55,6 +56,10 @@ public class ConsoleInteract : MonoBehaviour, IInteractable
 
     void GenerateFirstCameraView()
     {
+        if (LinkedReflectorsList.Count > 0) 
+            ConsoleImage.sprite = GameSettingsManager.instance.gameSettingsData.ConsoleWithReflectorsImage;
+        else ConsoleImage.sprite = GameSettingsManager.instance.gameSettingsData.ConsoleWithoutReflectorsImage;
+
         GenerateCameraView(camerasList[0]);
     }
     void GenerateCameraView(Camera cam)

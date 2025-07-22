@@ -739,6 +739,7 @@ MonoBehaviour:
   ReflectorIndex: 0
   _isControlled: 0
   ConsoleCamImage: {fileID: 439041958721264301}
+  ConsoleImage: {fileID: 6154590957788101391}
 --- !u!1 &2467378384671067633
 GameObject:
   m_ObjectHideFlags: 0
