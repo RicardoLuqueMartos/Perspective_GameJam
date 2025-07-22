@@ -11,10 +11,7 @@ public class ReflecteurMovable : MonoBehaviour, IInteractable
 
     PlayerInteract _playerInteract;
 
-    void OnEnable()
-    {
-        moveForce = GameSettingsManager.instance.gameSettingsData.ReflectorMoveForce;
-    }
+    
 
     public bool isControlled()
     {
@@ -25,12 +22,13 @@ public class ReflecteurMovable : MonoBehaviour, IInteractable
         if (hit.collider != null && !_isControlled)
         {
             UiManager.instance.contectuelInteracted(contextuelTXT);
-
         }
     }
     public void Interact(PlayerInteract player)
     {
-       Debug.Log("Interact ReflecteurMovable");
+        moveForce = GameSettingsManager.instance.gameSettingsData.ReflectorMoveForce;
+
+        Debug.Log("Interact ReflecteurMovable");
         _playerInteract = player;
         _playerInteract.isInteracting = true;
         _playerInteract.interactingTarget = this;
