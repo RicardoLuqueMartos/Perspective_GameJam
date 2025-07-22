@@ -22,7 +22,8 @@ public class CameraConsole : MonoBehaviour
     [SerializeField] int renderTextureCurrentSizeY = 480;
     [SerializeField] FilterMode m_filterMode = FilterMode.Point;
     [SerializeField] GraphicsFormat format;
- //   public int currentCameraIndex;
+ //   [SerializeField] depthb format;
+    //   public int currentCameraIndex;
 
     public static CameraConsole instance;
 
@@ -62,8 +63,9 @@ public class CameraConsole : MonoBehaviour
     
     }
 
-    public void OpenCameraConsole(ConsoleInteract consoleInteract)
+    public void OpenCameraConsole(ConsoleInteract _consoleInteract)
     {
+        consoleInteract = _consoleInteract;
         gameObject.SetActive(true);
     }
 

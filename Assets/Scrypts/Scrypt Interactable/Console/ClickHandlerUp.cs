@@ -12,6 +12,7 @@ public class ClickHandlerUp : MonoBehaviour, IUpdateSelectedHandler, IPointerDow
     {
         if (isPressed)
         {
+            Debug.Log("ClickHandlerUp");
             CameraConsole.instance.consoleInteract.LinkedReflectorsList[CameraConsole.instance.consoleInteract.ReflectorIndex]
                .RotateUp();
         }

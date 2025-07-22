@@ -725,14 +725,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eb2ccd58af8a054192e40f72050792c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camerasList:
-  - {fileID: 0}
-  - {fileID: 0}
-  LinkedReflectorsList:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  camerasList: []
+  LinkedReflectorsList: []
   consoleUI: {fileID: 0}
   contextuelTXT: Press E to use
   cameraIndex: 0

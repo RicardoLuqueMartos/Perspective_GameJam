@@ -30,7 +30,6 @@ public class ConsoleInteract : MonoBehaviour, IInteractable
 
     public void Interact(PlayerInteract player)
     {
-     //   consoleUI.SetActive(true);
         UiManager.instance.OpenCameraConsole(this);
         _isControlled = true;
         player.isInteracting = true;
@@ -40,11 +39,10 @@ public class ConsoleInteract : MonoBehaviour, IInteractable
 
     public void LeaveInteract()
     {
-    //    UiManager.instance.con.SetActive(false);
         _isControlled = false;
         _playerInteract.isInteracting = false;
-        _playerInteract = null;
         _playerInteract.interactingTarget = null;
+        _playerInteract = null;
+
     }
-    
 }

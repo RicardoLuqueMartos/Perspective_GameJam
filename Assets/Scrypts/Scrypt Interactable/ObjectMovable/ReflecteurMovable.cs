@@ -105,7 +105,7 @@ public class ReflecteurMovable : MonoBehaviour, IInteractable
     public void RotateUp()
     {
         // Pour gérer les angles négatifs
-
+        Debug.Log("RotateUp");
         float currentZ = sphereInclinaison.transform.localEulerAngles.z;
         if (currentZ > 180) currentZ -= 360;
         float newZ = Mathf.Clamp(currentZ + moveForce * Time.deltaTime, -90, 90);

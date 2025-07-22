@@ -28,20 +28,31 @@ public class ReflectorConsole : MonoBehaviour
 
     public void NextReflector()
     {
-        CameraConsole.instance.consoleInteract.ReflectorIndex = (CameraConsole.instance.consoleInteract.ReflectorIndex + 1) 
-            % CameraConsole.instance.consoleInteract.LinkedReflectorsList.Count;
+        if (CameraConsole.instance.consoleInteract.ReflectorIndex == CameraConsole.instance.consoleInteract.LinkedReflectorsList.Count - 1)
+            CameraConsole.instance.consoleInteract.ReflectorIndex = 0;
+        else CameraConsole.instance.consoleInteract.ReflectorIndex++;
+        
         DisplayIndex();
+        AssignSelectedReflector();
     }
 
     public void PreviousReflector()
     {
-        CameraConsole.instance.consoleInteract.ReflectorIndex = (CameraConsole.instance.consoleInteract.ReflectorIndex - 1)
-            % CameraConsole.instance.consoleInteract.LinkedReflectorsList.Count;
+        if (CameraConsole.instance.consoleInteract.ReflectorIndex == 0)
+            CameraConsole.instance.consoleInteract.ReflectorIndex = CameraConsole.instance.consoleInteract.LinkedReflectorsList.Count - 1;
+        else CameraConsole.instance.consoleInteract.ReflectorIndex--;
+       
         DisplayIndex();
+        AssignSelectedReflector();
     }
 
     public void DisplayIndex()
     {
         indexText.text = (CameraConsole.instance.consoleInteract.ReflectorIndex+1).ToString();
+    }
+
+    void AssignSelectedReflector()
+    {
+        UiManager.instance.selectedReflector = CameraConsole.instance.consoleInteract.LinkedReflectorsList[CameraConsole.instance.consoleInteract.ReflectorIndex];        
     }
 }
