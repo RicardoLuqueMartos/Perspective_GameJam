@@ -56,7 +56,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _Filtering_Detail: 3
-    - _Flow_Speed: 0.073
+    - _Flow_Speed: 0.1
     - _Fresnel_Power: 3
     - _QueueControl: 0
     - _QueueOffset: 0
