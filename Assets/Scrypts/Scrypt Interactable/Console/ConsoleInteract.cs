@@ -43,6 +43,7 @@ public class ConsoleInteract : MonoBehaviour, IInteractable
         player.isInteracting = true;
         _playerInteract = player;
         _playerInteract.interactingTarget = this;
+        
     }
 
     public void LeaveInteract()
@@ -51,6 +52,7 @@ public class ConsoleInteract : MonoBehaviour, IInteractable
         _playerInteract.isInteracting = false;
         _playerInteract.interactingTarget = null;
         _playerInteract = null;
+        CameraConsole.instance.ExitConsole();
     }
 
     void GenerateFirstCameraView()

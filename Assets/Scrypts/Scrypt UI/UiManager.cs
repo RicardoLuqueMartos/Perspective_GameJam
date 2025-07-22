@@ -47,8 +47,17 @@ public class UiManager : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.Escape))
         {
-            if (GameMenuObject.activeInHierarchy) HideMenu();
-            else DisplayMenu();
+            if (CameraConsole.instance == null || !CameraConsole.instance.gameObject.activeInHierarchy)
+            {
+                if (GameMenuObject.activeInHierarchy) HideMenu();
+                else DisplayMenu();
+                
+            }
+            else
+            {
+                CameraConsole.instance.ExitConsole();
+            }
+
         }
     }
 
@@ -113,11 +122,15 @@ public class UiManager : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.None;
         GameMenuObject.SetActive(true);
+        if (SoundLauncher.instance != null)
+            SoundLauncher.instance.PlayClickButton();
     }
 
     public void HideMenu()
     {
         Cursor.lockState = CursorLockMode.Locked;
         GameMenuObject.SetActive(false);
+        if (SoundLauncher.instance != null)
+            SoundLauncher.instance.PlayClickButtonFail();
     }
 }

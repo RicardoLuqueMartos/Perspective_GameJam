@@ -37,6 +37,7 @@ public class ReflecteurMovable : MonoBehaviour, IInteractable
         UiManager.instance.selectedReflector = this;
         UiManager.instance.Hidecontectuel();
         UiManager.instance.DisplayReflectorQuitText(true);
+        SoundLauncher.instance.PlayClickButton();
     }
 
     public void LeaveInteract()
@@ -53,6 +54,7 @@ public class ReflecteurMovable : MonoBehaviour, IInteractable
 
         UiManager.instance.DisplayReflectorQuitText(false);
         _playerInteract = null;
+        SoundLauncher.instance.PlayClickButtonFail();
     }
 
     // Update is called once per frame
