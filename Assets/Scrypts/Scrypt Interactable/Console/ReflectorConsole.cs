@@ -34,6 +34,7 @@ public class ReflectorConsole : MonoBehaviour
         
         DisplayIndex();
         AssignSelectedReflector();
+        SoundLauncher.instance.PlayClickButton();
     }
 
     public void PreviousReflector()
@@ -44,6 +45,7 @@ public class ReflectorConsole : MonoBehaviour
        
         DisplayIndex();
         AssignSelectedReflector();
+        SoundLauncher.instance.PlayClickButton();
     }
 
     public void DisplayIndex()

@@ -1,9 +1,12 @@
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SoundLauncher : MonoBehaviour
 {
     static public SoundLauncher instance;
+
+    [SerializeField] Slider volumeSlider;
     [SerializeField] SoundData soundData;
     [SerializeField] AudioSource audioSource;
     [SerializeField] AudioSource turretSource;
@@ -18,6 +21,13 @@ public class SoundLauncher : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        AudioListener.volume = 0.5f;  
+    }
+
+    public void VolumeSlider(Slider slider)
+    {
+        AudioListener.volume = slider.value;
     }
 
     public void PlayClickButton()
