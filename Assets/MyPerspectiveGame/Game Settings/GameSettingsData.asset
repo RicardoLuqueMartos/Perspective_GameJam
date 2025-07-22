@@ -13,3 +13,9 @@ MonoBehaviour:
   m_Name: GameSettingsData
   m_EditorClassIdentifier: 
   tesseractSprite: {fileID: 21300000, guid: df227943114bc8e4c804638ba06e502f, type: 3}
+  ReflectorMoveForce: 10
+  renderTextureCurrentSizeX: 854
+  renderTextureCurrentSizeY: 480
+  m_filterMode: 0
+  format: 8
+  depthFormat: 94

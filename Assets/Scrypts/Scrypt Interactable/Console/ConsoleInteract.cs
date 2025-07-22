@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ConsoleInteract : MonoBehaviour, IInteractable
 {
@@ -15,6 +16,13 @@ public class ConsoleInteract : MonoBehaviour, IInteractable
     public bool _isControlled = false;
 
     PlayerInteract _playerInteract;
+    public RawImage ConsoleCamImage;
+
+    void OnEnable()
+    {
+        Invoke("GenerateFirstCameraView", 1);
+    }
+
     public bool isControlled()
     {
         return _isControlled;
@@ -43,6 +51,30 @@ public class ConsoleInteract : MonoBehaviour, IInteractable
         _playerInteract.isInteracting = false;
         _playerInteract.interactingTarget = null;
         _playerInteract = null;
+    }
 
+    void GenerateFirstCameraView()
+    {
+        GenerateCameraView(camerasList[0]);
+    }
+    void GenerateCameraView(Camera cam)
+    {
+        RenderTexture newRT = CreateRenderTexture(camerasList[0]);
+        camerasList[0].targetTexture = newRT;
+        ConsoleCamImage.texture = newRT;
+    }
+    RenderTexture CreateRenderTexture(Camera cam)
+    {
+        if (GameSettingsManager.instance.gameSettingsData.renderTextureCurrentSizeX == 0 || GameSettingsManager.instance.gameSettingsData.renderTextureCurrentSizeY == 0)
+            return null;
+
+        // The RenderTextureReadWrite setting is purposely omitted in order to get the "Default" behavior.
+        return new RenderTexture(GameSettingsManager.instance.gameSettingsData.renderTextureCurrentSizeX, GameSettingsManager.instance.gameSettingsData.renderTextureCurrentSizeY
+            , 0, GameSettingsManager.instance.gameSettingsData.format)
+        {
+            hideFlags = HideFlags.HideAndDontSave,
+            name = cam.name,
+            filterMode = GameSettingsManager.instance.gameSettingsData.m_filterMode
+        };
     }
 }

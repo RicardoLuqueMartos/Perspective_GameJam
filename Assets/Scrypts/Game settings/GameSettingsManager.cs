@@ -6,7 +6,7 @@ public class GameSettingsManager : MonoBehaviour
 
     public static GameSettingsManager instance;
 
-    private void Awake()
+    private void Start()
     {
         CreateInstance();
     }

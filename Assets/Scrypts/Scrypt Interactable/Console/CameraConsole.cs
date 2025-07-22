@@ -16,13 +16,9 @@ public class CameraConsole : MonoBehaviour
     [SerializeField] RawImage camDisplay;
     [SerializeField] TMP_Text indexText;
     [SerializeField] ReflectorConsole reflectorsConsole;
-    [Header("RenderTexture Settings")]
-    [SerializeField] List<RenderTexture> renderTexturesList = new List<RenderTexture>();
-    [SerializeField] int renderTextureCurrentSizeX = 854;
-    [SerializeField] int renderTextureCurrentSizeY = 480;
-    [SerializeField] FilterMode m_filterMode = FilterMode.Point;
-    [SerializeField] GraphicsFormat format;
- //   [SerializeField] depthb format;
+    public List<RenderTexture> renderTexturesList = new List<RenderTexture>();
+
+    //   [SerializeField] depthb format;
     //   public int currentCameraIndex;
 
     public static CameraConsole instance;
@@ -84,15 +80,16 @@ public class CameraConsole : MonoBehaviour
 
     RenderTexture CreateRenderTexture(Camera cam)
     {
-        if (renderTextureCurrentSizeX == 0 || renderTextureCurrentSizeY == 0)
+        if (GameSettingsManager.instance.gameSettingsData.renderTextureCurrentSizeX == 0 || GameSettingsManager.instance.gameSettingsData.renderTextureCurrentSizeY == 0)
             return null;
 
         // The RenderTextureReadWrite setting is purposely omitted in order to get the "Default" behavior.
-        return new RenderTexture(renderTextureCurrentSizeX, renderTextureCurrentSizeY, 0, format)
+        return new RenderTexture(GameSettingsManager.instance.gameSettingsData.renderTextureCurrentSizeX, GameSettingsManager.instance.gameSettingsData.renderTextureCurrentSizeY
+            , 0, GameSettingsManager.instance.gameSettingsData.format)
         {
             hideFlags = HideFlags.HideAndDontSave,
             name = cam.name,
-            filterMode = m_filterMode
+            filterMode = GameSettingsManager.instance.gameSettingsData.m_filterMode
         };
     }
     #endregion Camera view
@@ -114,11 +111,13 @@ public class CameraConsole : MonoBehaviour
     private void SetCameraDisplay()
     {
         Camera cam = consoleInteract.camerasList[consoleInteract.cameraIndex];
-     //   currentCam = cam;
+
         indexText.text = (consoleInteract.cameraIndex + 1).ToString();
         if (cam != null)
         {
             camDisplay.texture = renderTexturesList[consoleInteract.cameraIndex];
+            consoleInteract.ConsoleCamImage.texture = renderTexturesList[consoleInteract.cameraIndex];
+
         }
         else
         {

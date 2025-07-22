@@ -982,7 +982,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 6828460437258239614}
         m_TargetAssemblyTypeName: UiManager, Assembly-CSharp
-        m_MethodName: RestartGame
+        m_MethodName: QuitGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2580,7 +2580,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4666104352548546249, guid: 32380e0571696114082c6553b279f8fa, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4683312399382661573, guid: 32380e0571696114082c6553b279f8fa, type: 3}
       propertyPath: m_SizeDelta.x

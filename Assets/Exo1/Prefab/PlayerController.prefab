@@ -332,6 +332,8 @@ MonoBehaviour:
   cameraOrbit: {fileID: 2785730034615946660}
   animatorManager: {fileID: 8565641421662440350}
   UsingRootMotion: 0
+  cameraType: 0
+  LockedCamera: 0
 --- !u!114 &2785730034615946660
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -346,12 +348,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 459268021047118128}
   cameraParentTransform: {fileID: 0}
+  cameraFollowBack: {fileID: 0}
   mouseX: 0
   mouseY: 0
+  x: 0
+  y: 0
   xSpeed: 30
   ySpeed: 30
-  yMinLimit: -20
-  yMaxLimit: 50
+  yMinLimit: -50
+  yMaxLimit: 70
   xMinLimit: -35
   xMaxLimit: 35
   aimingObject: {fileID: 0}
@@ -420,7 +425,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be55c477b7afe4b44adcb80a88bc68ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentRespawnTransform: {fileID: 0}
   tesseractAmount: 0
+  prefabTeresac: {fileID: 0}
 --- !u!1001 &1849228225398772191
 PrefabInstance:
   m_ObjectHideFlags: 0
