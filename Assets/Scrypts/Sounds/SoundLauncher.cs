@@ -1,5 +1,6 @@
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SoundLauncher : MonoBehaviour
 {
@@ -18,6 +19,13 @@ public class SoundLauncher : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        AudioListener.volume = 0.5f;
+    }
+
+    public void VolumeSlider(Slider slider)
+    {
+        AudioListener.volume = slider.value;
     }
 
     public void PlayClickButton()

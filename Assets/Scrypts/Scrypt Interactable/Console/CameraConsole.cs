@@ -63,6 +63,7 @@ public class CameraConsole : MonoBehaviour
     {
         consoleInteract = _consoleInteract;
         gameObject.SetActive(true);
+        SoundLauncher.instance.PlayClickButton();
     }
 
     #region Camera view
@@ -144,5 +145,7 @@ public class CameraConsole : MonoBehaviour
     public void ExitConsole()
     {
         gameObject.SetActive(false);
+
+        SoundLauncher.instance.PlayClickButtonFail();
     }
 }
