@@ -6,6 +6,7 @@ using static UnityEngine.UI.Image;
 [RequireComponent(typeof(LineRenderer))]
 public class RayonEmission : MonoBehaviour
 {
+    [SerializeField] int maxRebonds = 50;
     private LineRenderer rayonRenderer;
     private List<RaycastHit> hits = new List<RaycastHit>();
     bool endWithOutHit;
@@ -86,7 +87,7 @@ public class RayonEmission : MonoBehaviour
                             endWithOutHit = true;
                             break;
                         }
-                        else if (hits.Count >= 50) // Limite de rebonds pour éviter les boucles infinies
+                        else if (hits.Count >= maxRebonds) // Limite de rebonds pour éviter les boucles infinies
                         {
                             Debug.LogWarning("Rayon has hit too many reflectors, stopping to prevent infinite loop.");
                             break;

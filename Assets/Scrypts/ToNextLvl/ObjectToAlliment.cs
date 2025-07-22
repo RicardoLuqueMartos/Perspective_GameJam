@@ -6,7 +6,6 @@ using static Unity.VisualScripting.Member;
 public class ObjectToAlliment : MonoBehaviour
 {
     bool powered = false;
-
     [SerializeField] Transform transformOn;
     [SerializeField] Transform transformOff;
     [SerializeField] float timeToMove = 1;
@@ -29,37 +28,53 @@ public class ObjectToAlliment : MonoBehaviour
 
     public void SetPositionOn()
     {
-        if (audioSourceOFF.isPlaying)
+        if (audioSourceOFF != null && audioSourceOFF.isPlaying)
             {
             audioSourceOFF.Stop();
             }
-        if (!audioSourceON.isPlaying)
+        if (audioSourceON != null && !audioSourceON.isPlaying)
         {
             SoundLauncher.instance.PlayStructureMove(audioSourceON);
 
         }
-        transform.DOMove(transformOn.position, timeToMove)
+
+        if (audioSourceON != null)
+        {
+            transform.DOMove(transformOn.position, timeToMove)
             .OnComplete(() => audioSourceON.Stop());
-        transform.DORotate(transformOn.rotation.eulerAngles, timeToMove)
+            transform.DORotate(transformOn.rotation.eulerAngles, timeToMove)
             .OnComplete(() => audioSourceON.Stop());
+        }
+        else
+        {
+            transform.DOMove(transformOn.position, timeToMove);
+            transform.DORotate(transformOn.rotation.eulerAngles, timeToMove);
+        }
     }
 
     public void SetPositionOff()
     {
-        if (audioSourceON.isPlaying)
+        if (audioSourceON != null && audioSourceON.isPlaying)
         {
             audioSourceON.Stop();
         }
-        if (!audioSourceOFF.isPlaying)
+        if (audioSourceOFF != null && !audioSourceOFF.isPlaying)
         { 
             SoundLauncher.instance.PlayStructureMove(audioSourceOFF); 
         
         }
-            
-        transform.DOMove(transformOff.position, timeToMove)
+        if (audioSourceOFF != null)
+        {
+            transform.DOMove(transformOff.position, timeToMove)
             .OnComplete(() => audioSourceOFF.Stop());
-        transform.DORotate(transformOff.rotation.eulerAngles, timeToMove)
+            transform.DORotate(transformOff.rotation.eulerAngles, timeToMove)
             .OnComplete(() => audioSourceOFF.Stop());
+        }
+        else
+        {
+            transform.DOMove(transformOff.position, timeToMove);
+            transform.DORotate(transformOff.rotation.eulerAngles, timeToMove);
+        }
     }
 
     public void CheckAllimentation()

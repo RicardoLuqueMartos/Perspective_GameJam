@@ -35,6 +35,7 @@ public class ConsoleInteract : MonoBehaviour, IInteractable
         _isControlled = true;
         player.isInteracting = true;
         _playerInteract = player;
+        _playerInteract.interactingTarget = this;
     }
 
     public void LeaveInteract()
@@ -43,6 +44,7 @@ public class ConsoleInteract : MonoBehaviour, IInteractable
         _isControlled = false;
         _playerInteract.isInteracting = false;
         _playerInteract = null;
+        _playerInteract.interactingTarget = null;
     }
     
 }

@@ -28,9 +28,8 @@ public class ReflecteurMovable : MonoBehaviour, IInteractable
        Debug.Log("Interact ReflecteurMovable");
         _playerInteract = player;
         _playerInteract.isInteracting = true;
+        _playerInteract.interactingTarget = this;
         _isControlled = true;
-        Debug.Log(_isControlled);
-    //    RBPlayer.instance.LockMovements();
 
         UiManager.instance.selectedReflector = this;
         UiManager.instance.Hidecontectuel();
@@ -41,7 +40,8 @@ public class ReflecteurMovable : MonoBehaviour, IInteractable
     {
         Debug.Log("Leave Interact ReflecteurMovable");
         _playerInteract.isInteracting = false;
-        _playerInteract = null;
+        
+        _playerInteract.interactingTarget = null;
         _isControlled = false;
         UiManager.instance.selectedReflector = null;
 
@@ -49,6 +49,7 @@ public class ReflecteurMovable : MonoBehaviour, IInteractable
         UiManager.instance.Displaycontectuel();
 
         UiManager.instance.DisplayReflectorQuitText(false);
+        _playerInteract = null;
     }
 
 

@@ -559,6 +559,10 @@ PrefabInstance:
       propertyPath: currentRespawnTransform
       value: 
       objectReference: {fileID: 594870083}
+    - target: {fileID: 3597130471515541419, guid: df0b56dab1d99f1468757b154aedcdee, type: 3}
+      propertyPath: interactDistanceMax
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5604767219390592636, guid: df0b56dab1d99f1468757b154aedcdee, type: 3}
       propertyPath: m_LocalPosition.x
       value: -8.05
