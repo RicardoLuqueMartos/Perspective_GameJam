@@ -87,7 +87,8 @@ public class RayonEmission : MonoBehaviour
                             endWithOutHit = true;
                             break;
                         }
-                        else if (hits.Count >= maxRebonds) // Limite de rebonds pour éviter les boucles infinies
+
+                        if (hits.Count >= maxRebonds) // Limite de rebonds pour éviter les boucles infinies
                         {
                             Debug.LogWarning("Rayon has hit too many reflectors, stopping to prevent infinite loop.");
                             break;
