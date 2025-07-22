@@ -11,6 +11,11 @@ public class ReflecteurMovable : MonoBehaviour, IInteractable
 
     PlayerInteract _playerInteract;
 
+    void OnEnable()
+    {
+        moveForce = GameSettingsManager.instance.gameSettingsData.ReflectorMoveForce;
+    }
+
     public bool isControlled()
     {
         return _isControlled;
@@ -50,13 +55,6 @@ public class ReflecteurMovable : MonoBehaviour, IInteractable
 
         UiManager.instance.DisplayReflectorQuitText(false);
         _playerInteract = null;
-    }
-
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
     }
 
     // Update is called once per frame

@@ -6,5 +6,5 @@ public class GameSettingsData : ScriptableObject
 {
     public Sprite tesseractSprite;
 
-
+    public int ReflectorMoveForce = 10;
 }
