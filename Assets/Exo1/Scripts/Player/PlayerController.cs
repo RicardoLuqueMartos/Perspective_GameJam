@@ -11,6 +11,7 @@ using UnityEngine.UIElements;
 public class PlayerController : MonoBehaviour
 {
     public bool IsInteracting;
+    public bool useDoubleJump = false;
     [SerializeField] private bool CanWalk = false;
     [SerializeField] private bool isOnGround = false;
     public bool isJumping = false;
@@ -83,8 +84,8 @@ public class PlayerController : MonoBehaviour
         isOnGround = Physics.CheckSphere(groundCheck.position, detectionRange, groundLayer);
         if (isOnGround)
         {
-            isJumping = false;
-            animatorManager.animator.SetBool("IsDoubleJumping", false);
+         //   isJumping = false;
+          //  animatorManager.animator.SetBool("IsDoubleJumping", false);
         }
         animatorManager.animator.SetBool("IsGrounded", isOnGround);
         return isOnGround;
@@ -158,11 +159,12 @@ public class PlayerController : MonoBehaviour
             {
                 isJumping = true;
                 CanDoubleJump = false;
-                Invoke("InvokeCanDoubleJump", DoubleJumpDelay);
+                if (useDoubleJump) Invoke("InvokeCanDoubleJump", DoubleJumpDelay);
                 DoJump();
             }
-            else if (!isDoubleJump && CanDoubleJump)
+            else if (useDoubleJump && !isDoubleJump && CanDoubleJump)
             {
+                Debug.Log("useDoubleJump && !isDoubleJump && CanDoubleJump");
                 DoDoubleJump(); 
                 CanDoubleJump = false;
             }
@@ -194,6 +196,7 @@ public class PlayerController : MonoBehaviour
     }
     void SendRunJumpToAnimator()
     {
+        animatorManager.animator.SetBool("IsGrounded", false);
         animatorManager.animator.SetBool("Jumping", true);
         animatorManager.PlayTargetAnimation("Jump_Run", false);
     }
