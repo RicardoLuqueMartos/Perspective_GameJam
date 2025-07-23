@@ -20,7 +20,15 @@ public class RayonEmission : MonoBehaviour
     {
 
         rayonRenderer = GetComponent<LineRenderer>();
-        rayonRenderer.enabled = false;
+
+        if (powered)
+        {
+            rayonRenderer.enabled = true;
+        }
+        else
+        {
+            rayonRenderer.enabled = false; // Désactive le LineRenderer si le rayon n'est pas alimenté
+        }
     }
 
     // Update is called once per frame  
