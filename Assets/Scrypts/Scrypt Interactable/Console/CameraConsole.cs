@@ -47,7 +47,6 @@ public class CameraConsole : MonoBehaviour
     private void OnEnable()
     {
         Cursor.lockState = CursorLockMode.None;
-     
         UiManager.instance.Hidecontectuel();
         InitRenderTexturesList();
         InitReflectorsPanel();
@@ -56,14 +55,21 @@ public class CameraConsole : MonoBehaviour
     private void OnDisable()
     {
         Cursor.lockState = CursorLockMode.Locked;
-    
     }
 
     public void OpenCameraConsole(ConsoleInteract _consoleInteract)
     {
+        UiManager.instance.HideAllControlsInfos();
         consoleInteract = _consoleInteract;
         gameObject.SetActive(true);
         SoundLauncher.instance.PlayClickButton();
+    }
+
+    public void ExitConsole()
+    {
+        gameObject.SetActive(false);
+        SoundLauncher.instance.PlayClickButtonFail();
+        UiManager.instance.DisplayBaseControlsInfo();
     }
 
     #region Camera view
@@ -142,10 +148,5 @@ public class CameraConsole : MonoBehaviour
     }
     #endregion Camera selection
 
-    public void ExitConsole()
-    {
-        gameObject.SetActive(false);
-
-        SoundLauncher.instance.PlayClickButtonFail();
-    }
+    
 }

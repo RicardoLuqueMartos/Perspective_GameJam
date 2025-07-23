@@ -22,6 +22,8 @@ public class UiManager : MonoBehaviour
     [SerializeField] public Image fadingPanel;
     public TMP_Text tesseractAmount;
 
+    [SerializeField] GameObject BaseControlsInfo;
+    [SerializeField] GameObject ReflectorsControlsInfo;
 
     void Start()
     {
@@ -61,6 +63,43 @@ public class UiManager : MonoBehaviour
         }
     }
 
+
+    public void OpenCameraConsole(ConsoleInteract consoleInteract)
+    {
+        Hidecontectuel();
+        HideAllControlsInfos();
+        cameraConsole.OpenCameraConsole(consoleInteract);
+    }
+
+    public void DisplayTesseract(bool value, int amount)
+    {
+        tesseractAmount.text = amount.ToString();
+        if (amount > 1) tesseractAmount.transform.parent.gameObject.SetActive(true);
+        else tesseractAmount.transform.parent.gameObject.SetActive(false);
+        tesseractImage.sprite = gameSettingsData.tesseractSprite;
+        tesseractImage.transform.parent.gameObject.SetActive(value);
+        Hidecontectuel();
+    }
+
+    #region Controls Infos
+    public void HideAllControlsInfos()
+    {
+        BaseControlsInfo.SetActive(false);
+        ReflectorsControlsInfo.SetActive(false);
+    }
+
+    public void DisplayBaseControlsInfo()
+    {
+        BaseControlsInfo.SetActive(true);
+    }
+
+    public void DisplayReflectorsControlsInfo()
+    {
+        ReflectorsControlsInfo.SetActive(true);
+    }
+    #endregion Controls Infos
+
+    #region Contextual info
     public void contectuelInteracted(string interactTxt)
     {
         contextuelInteract.text = interactTxt;
@@ -76,22 +115,6 @@ public class UiManager : MonoBehaviour
         contextuelInteract.transform.parent.gameObject.SetActive(false);
     }
 
-    public void OpenCameraConsole(ConsoleInteract consoleInteract)
-    {
-        Hidecontectuel();
-        cameraConsole.OpenCameraConsole(consoleInteract);
-    }
-
-    public void DisplayTesseract(bool value, int amount)
-    {
-        tesseractAmount.text = amount.ToString();
-        if(amount > 1) tesseractAmount.transform.parent.gameObject.SetActive(true); 
-        else tesseractAmount.transform.parent.gameObject.SetActive(false);
-        tesseractImage.sprite = gameSettingsData.tesseractSprite;
-        tesseractImage.transform.parent.gameObject.SetActive(value);
-        Hidecontectuel();
-    }
-
     bool CanDisplayContextuel()
     {
         bool response = true;
@@ -105,9 +128,9 @@ public class UiManager : MonoBehaviour
     {
         RefectorQuitPanel.SetActive(value);
     }
+    #endregion Contextual info
 
-
-
+    #region Menu & quit restart
     public void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
@@ -120,6 +143,7 @@ public class UiManager : MonoBehaviour
 
     public void DisplayMenu()
     {
+        HideAllControlsInfos();
         Cursor.lockState = CursorLockMode.None;
         GameMenuObject.SetActive(true);
         if (SoundLauncher.instance != null)
@@ -128,9 +152,11 @@ public class UiManager : MonoBehaviour
 
     public void HideMenu()
     {
+        DisplayBaseControlsInfo();
         Cursor.lockState = CursorLockMode.Locked;
         GameMenuObject.SetActive(false);
         if (SoundLauncher.instance != null)
             SoundLauncher.instance.PlayClickButtonFail();
     }
+    #endregion Menu & quit restart
 }
