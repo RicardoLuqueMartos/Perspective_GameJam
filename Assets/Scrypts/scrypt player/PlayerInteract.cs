@@ -1,5 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
 public class PlayerInteract : MonoBehaviour
@@ -14,7 +15,7 @@ public class PlayerInteract : MonoBehaviour
     public bool isInteracting = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
-
+  
     void FixedUpdate()
     {
         RayDetectInteractable();
@@ -27,7 +28,7 @@ public class PlayerInteract : MonoBehaviour
         //hit = new RaycastHit();
         //Physics.Raycast(transform.position , transform.forward, out hit, interactDistance, interactable);
 
-        if (interactingTarget != null && Input.GetKeyDown(KeyCode.E))
+        if (interactingTarget != null && /*Input.GetKeyDown(KeyCode.E)*/ PlayerController.instance.IsInteracting)
         {
             LeaveInteractByKey();            
             return;
@@ -41,9 +42,9 @@ public class PlayerInteract : MonoBehaviour
 
                 if (currentTarget != null)
                 {
-                    Debug.Log(hit.transform.name);
+                 //   Debug.Log(hit.transform.name);
                     currentTarget.IsInteractable(hit);
-                    if (Input.GetKeyDown(KeyCode.E))
+                    if (/*Input.GetKeyDown(KeyCode.E)*/ PlayerController.instance.IsInteracting)
                     {
 
 

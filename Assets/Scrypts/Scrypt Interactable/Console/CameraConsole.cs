@@ -91,13 +91,15 @@ public class CameraConsole : MonoBehaviour
             return null;
 
         // The RenderTextureReadWrite setting is purposely omitted in order to get the "Default" behavior.
-        return new RenderTexture(GameSettingsManager.instance.gameSettingsData.renderTextureCurrentSizeX, GameSettingsManager.instance.gameSettingsData.renderTextureCurrentSizeY
-            , 0, GameSettingsManager.instance.gameSettingsData.format)
+        RenderTexture texture = new (GameSettingsManager.instance.gameSettingsData.renderTextureCurrentSizeX, GameSettingsManager.instance.gameSettingsData.renderTextureCurrentSizeY
+            , 24, GameSettingsManager.instance.gameSettingsData.format)
         {
             hideFlags = HideFlags.HideAndDontSave,
             name = cam.name,
             filterMode = GameSettingsManager.instance.gameSettingsData.m_filterMode
         };
+
+        return texture;
     }
     #endregion Camera view
 

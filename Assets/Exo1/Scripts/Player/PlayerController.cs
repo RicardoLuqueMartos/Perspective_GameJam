@@ -65,6 +65,8 @@ public class PlayerController : MonoBehaviour
     {
         rigidBody = GetComponent<Rigidbody>();
         cameraTransform = Camera.main.transform;
+
+        
     }
 
     private void FixedUpdate()
@@ -212,13 +214,21 @@ public class PlayerController : MonoBehaviour
     void OnSprint(InputValue value)
     {
         float val = value.Get<float>();
-        if (val == 1)
+        if (val == 1) 
             isSprinting = true;
-
-        else
+        else 
             isSprinting = false;
     }
 
+    void OnInteract(InputValue value)
+    {
+        Debug.Log("OnInteract " + value);
+        float val = value.Get<float>();
+        if (val == 1)
+            IsInteracting = true;
+        else
+            IsInteracting = false;
+    }       
     public void KillPlayer()
     {
         StartCoroutine(FadeOutToRespawn());
