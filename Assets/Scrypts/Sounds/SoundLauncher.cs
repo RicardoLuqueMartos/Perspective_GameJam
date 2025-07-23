@@ -8,6 +8,7 @@ public class SoundLauncher : MonoBehaviour
     [SerializeField] SoundData soundData;
     [SerializeField] AudioSource audioSource;
     [SerializeField] AudioSource turretSource;
+    [SerializeField] AudioSource bouttonSource;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -33,7 +34,7 @@ public class SoundLauncher : MonoBehaviour
         if (soundData.clicksBoutton.Length > 0)
         {
             AudioClip clip = soundData.clicksBoutton[Random.Range(0, soundData.clicksBoutton.Length)];
-            audioSource.PlayOneShot(clip);
+            bouttonSource.PlayOneShot(clip);
         }
     }
 
@@ -42,7 +43,7 @@ public class SoundLauncher : MonoBehaviour
         if (soundData.clickBouttonFail.Length > 0)
         {
             AudioClip clip = soundData.clickBouttonFail[Random.Range(0, soundData.clickBouttonFail.Length)];
-            audioSource.PlayOneShot(clip);
+            bouttonSource.PlayOneShot(clip);
         }
     }
 
