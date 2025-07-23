@@ -28,7 +28,7 @@ public class PlayerInteract : MonoBehaviour
         //hit = new RaycastHit();
         //Physics.Raycast(transform.position , transform.forward, out hit, interactDistance, interactable);
 
-        if (interactingTarget != null && /*Input.GetKeyDown(KeyCode.E)*/ PlayerController.instance.IsInteracting)
+        if (interactingTarget != null && Input.GetKeyDown(KeyCode.E) /*PlayerController.instance.IsInteracting*/)
         {
             LeaveInteractByKey();            
             return;
@@ -44,7 +44,7 @@ public class PlayerInteract : MonoBehaviour
                 {
                  //   Debug.Log(hit.transform.name);
                     currentTarget.IsInteractable(hit);
-                    if (/*Input.GetKeyDown(KeyCode.E)*/ PlayerController.instance.IsInteracting)
+                    if (Input.GetKeyDown(KeyCode.E)/* PlayerController.instance.IsInteracting*/)
                     {
 
 

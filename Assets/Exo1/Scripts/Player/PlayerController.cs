@@ -10,7 +10,7 @@ using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
-    public bool IsInteracting;
+ //   public bool IsInteracting;
     public bool useDoubleJump = false;
     [SerializeField] private bool CanWalk = false;
     [SerializeField] private bool isOnGround = false;
@@ -113,8 +113,8 @@ public class PlayerController : MonoBehaviour
 
     void MovePlayer()
     {
-        if (IsInteracting)
-            return;
+    //    if (IsInteracting)
+    //        return;
 
         if (IsGrounded())
         {
@@ -220,15 +220,16 @@ public class PlayerController : MonoBehaviour
             isSprinting = false;
     }
 
-    void OnInteract(InputValue value)
+/*    void OnInteract(InputValue value)
     {
-        Debug.Log("OnInteract " + value);
+        Debug.Log("OnInteract " + value.ToString());
         float val = value.Get<float>();
         if (val == 1)
             IsInteracting = true;
         else
             IsInteracting = false;
-    }       
+    } */ 
+    
     public void KillPlayer()
     {
         StartCoroutine(FadeOutToRespawn());
