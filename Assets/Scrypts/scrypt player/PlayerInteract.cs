@@ -15,58 +15,80 @@ public class PlayerInteract : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
+    {
+        RayDetectInteractable();
+
+        LeaveInteractByDistance();
+    }
+
+    void RayDetectInteractable()
     {
         //hit = new RaycastHit();
         //Physics.Raycast(transform.position , transform.forward, out hit, interactDistance, interactable);
-        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
-        Physics.Raycast(ray, out hit, interactDistance, interactable);
-        if (hit.collider == null && interactingTarget != null && Input.GetKeyDown(KeyCode.E))
+
+        if (interactingTarget != null && Input.GetKeyDown(KeyCode.E))
         {
-            interactingTarget.LeaveInteract();
-            interactingTarget = null;
+            LeaveInteractByKey();            
             return;
         }
-        else if (hit.collider != null)
-        {
-            
-                currentTarget = hit.collider.GetComponent<IInteractable>();
-            
-            if (currentTarget != null)
+
+        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+        if (Physics.Raycast(ray, out hit, interactDistance, interactable)){
+             if (hit.collider != null)
             {
-                //Debug.Log(hit.transform.name);
-                currentTarget.IsInteractable(hit);
-                if (Input.GetKeyDown(KeyCode.E))
+                currentTarget = hit.collider.GetComponent<IInteractable>();
+
+                if (currentTarget != null)
                 {
-
-
-                    if (!currentTarget.isControlled())
+                    Debug.Log(hit.transform.name);
+                    currentTarget.IsInteractable(hit);
+                    if (Input.GetKeyDown(KeyCode.E))
                     {
-                        if (interactingTarget != null)
+
+
+                        if (!currentTarget.isControlled())
                         {
-                            interactingTarget.LeaveInteract();
+                            if (interactingTarget != null)
+                            {
+                                interactingTarget.LeaveInteract();
+                            }
+                            currentTarget.Interact(this);
                         }
-                        currentTarget.Interact(this);
-                    }
-                    else
-                    {
-                        currentTarget.LeaveInteract();
+                        else
+                        {
+                            currentTarget.LeaveInteract();
+                        }
                     }
                 }
+                else
+                {
+                    Debug.Log("Hidecontectuel " + hit.transform.name);
+                    UiManager.instance.Hidecontectuel();
+                }
             }
-            else UiManager.instance.Hidecontectuel();
         }
+        
         else if (UiManager.instance != null && !isInteracting)
         {
             currentTarget = null;
             UiManager.instance.contectuelInteracted("");
             UiManager.instance.Hidecontectuel();
         }
+    }
 
+    void LeaveInteractByKey()
+    {
+        interactingTarget.LeaveInteract();
+        interactingTarget = null;
+    }
+
+    void LeaveInteractByDistance()
+    {
         if (isInteracting && interactingTarget != null &&
             Vector3.Distance(this.transform.position, ((MonoBehaviour)interactingTarget).transform.position) > interactDistanceMax)
         {
+            Debug.Log("Distance LeaveInteract");
             interactingTarget.LeaveInteract();
             interactingTarget = null;
         }

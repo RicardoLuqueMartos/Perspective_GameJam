@@ -13,7 +13,6 @@ public class RayonEmission : MonoBehaviour
     public bool powered;
     Vector3 directionWithOutHit;
 
-    //[SerializeField] private ReccepteurRayon lastReccepteurRayon;
     [SerializeField] private ReccepteurRayon currentReccepteurRayon;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created  
@@ -75,7 +74,7 @@ public class RayonEmission : MonoBehaviour
                         }
                         else if (newhit.collider != null && newhit.collider.CompareTag("Reflecteur"))
                         {
-                            Debug.Log("Rayon hit reflector: " + newhit.collider.name);
+                        //    Debug.Log("Rayon hit reflector: " + newhit.collider.name);
                             hits.Add(newhit);
                             currentDirection = newDirection;
                             lastHit = newhit;
@@ -95,7 +94,7 @@ public class RayonEmission : MonoBehaviour
                         }
                     }
 
-                    Debug.Log("Rayon has hit " + hits.Count + " reflectors.");
+                 //   Debug.Log("Rayon has hit " + hits.Count + " reflectors.");
                     // Calcul du nombre total de points
                     int totalPoints = hits.Count + 1; // +1 pour le point de départ
                     if (endWithOutHit)
@@ -147,10 +146,9 @@ public class RayonEmission : MonoBehaviour
                     PlayerController.instance.KillPlayer();
                     return;
                 }
-                else Debug.Log("Rayon ending on " + hits[hits.Count - 1].collider.name);
+            //    else Debug.Log("Rayon ending on " + hits[hits.Count - 1].collider.name);
             }
-            else
-                Debug.Log("RayonRenderer has no hits, setting to default length.");
+        //    else Debug.Log("RayonRenderer has no hits, setting to default length.");
         }
     }
 
