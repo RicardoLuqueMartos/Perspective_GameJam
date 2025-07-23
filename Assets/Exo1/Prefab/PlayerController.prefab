@@ -308,8 +308,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15391be4bf5f4f94a99af3408980ba44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsInteracting: 0
-  useDoubleJump: 1
+  useDoubleJump: 0
   CanWalk: 1
   isOnGround: 0
   isJumping: 0
@@ -317,7 +316,7 @@ MonoBehaviour:
   CanDoubleJump: 0
   DoubleJumpDelay: 0.1
   groundCheck: {fileID: 3798678373805289016}
-  detectionRange: 0.52
+  detectionRange: 0.521
   groundLayer:
     serializedVersion: 2
     m_Bits: 9

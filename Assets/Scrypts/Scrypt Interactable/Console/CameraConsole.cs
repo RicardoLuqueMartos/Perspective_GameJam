@@ -67,6 +67,7 @@ public class CameraConsole : MonoBehaviour
 
     public void ExitConsole()
     {
+        UiManager.instance.selectedReflector = null;
         gameObject.SetActive(false);
         SoundLauncher.instance.PlayClickButtonFail();
         UiManager.instance.DisplayBaseControlsInfo();

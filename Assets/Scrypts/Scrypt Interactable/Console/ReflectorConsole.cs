@@ -16,14 +16,12 @@ public class ReflectorConsole : MonoBehaviour
     }
     public void RotateUp()
     {
-        CameraConsole.instance.consoleInteract.LinkedReflectorsList[CameraConsole.instance.consoleInteract.ReflectorIndex]
-            .RotateUp();
+    //    CameraConsole.instance.consoleInteract.LinkedReflectorsList[CameraConsole.instance.consoleInteract.ReflectorIndex].RotateUp();
     }
 
     public void RotateDown()
     {
-        CameraConsole.instance.consoleInteract.LinkedReflectorsList[CameraConsole.instance.consoleInteract.ReflectorIndex]
-            .RotateDown();
+     //   CameraConsole.instance.consoleInteract.LinkedReflectorsList[CameraConsole.instance.consoleInteract.ReflectorIndex].RotateDown();
     }
 
     public void NextReflector()
