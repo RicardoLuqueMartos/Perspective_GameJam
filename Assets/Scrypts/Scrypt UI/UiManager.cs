@@ -8,10 +8,9 @@ public class UiManager : MonoBehaviour
     [SerializeField] GameSettingsData gameSettingsData;
 
     public static UiManager instance;
-
+    public Image centerCursorImage;
     public CameraConsole cameraConsole;
     public ReflecteurMovable selectedReflector;
-
 
     public GameObject GameMenuObject;
 
@@ -143,6 +142,7 @@ public class UiManager : MonoBehaviour
 
     public void DisplayMenu()
     {
+        centerCursorImage.gameObject.SetActive(false);  
         HideAllControlsInfos();
         Cursor.lockState = CursorLockMode.None;
         GameMenuObject.SetActive(true);
@@ -152,6 +152,7 @@ public class UiManager : MonoBehaviour
 
     public void HideMenu()
     {
+        centerCursorImage.gameObject.SetActive(true);
         DisplayBaseControlsInfo();
         Cursor.lockState = CursorLockMode.Locked;
         GameMenuObject.SetActive(false);

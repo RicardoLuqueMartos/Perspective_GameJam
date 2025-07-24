@@ -58,6 +58,7 @@ public class CameraConsole : MonoBehaviour
 
     public void OpenCameraConsole(ConsoleInteract _consoleInteract)
     {
+        UiManager.instance.centerCursorImage.gameObject.SetActive(false);   
         UiManager.instance.HideAllControlsInfos();
         consoleInteract = _consoleInteract;
         gameObject.SetActive(true);
@@ -66,6 +67,7 @@ public class CameraConsole : MonoBehaviour
 
     public void ExitConsole()
     {
+        UiManager.instance.centerCursorImage.gameObject.SetActive(true);
         UiManager.instance.selectedReflector = null;
         gameObject.SetActive(false);
         SoundLauncher.instance.PlayClickButtonFail();
