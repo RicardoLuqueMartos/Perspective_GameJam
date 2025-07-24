@@ -13,9 +13,14 @@ public class PlayerInteract : MonoBehaviour
     public IInteractable interactingTarget;
 
     public bool isInteracting = false;
+    Ray ray;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
-  
+
+    private void Update()
+    {
+        ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+    }
     void FixedUpdate()
     {
         RayDetectInteractable();
@@ -35,7 +40,6 @@ public class PlayerInteract : MonoBehaviour
             return;
         }
 
-        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
         if (Physics.Raycast(ray, out hit, interactDistance, interactable)){
              if (hit.collider != null)
             {
