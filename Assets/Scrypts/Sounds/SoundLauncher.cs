@@ -11,6 +11,7 @@ public class SoundLauncher : MonoBehaviour
     [SerializeField] AudioSource turretSource;
     [SerializeField] AudioSource bouttonSource;
     [SerializeField] AudioSource dissolveSource;
+    [SerializeField] AudioSource musicSource;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -26,6 +27,26 @@ public class SoundLauncher : MonoBehaviour
         AudioListener.volume = 0.5f;
     }
 
+
+    private void Update()
+    {
+        if (musicSource != null && !musicSource.isPlaying)
+        {
+            PlayMusicWithAutoFadeOut(5f);
+        }
+    }
+
+    private void PlayMusicWithAutoFadeOut(float fadeDuration)
+    {
+        musicSource.Play();
+        musicSource.DOFade(1f, fadeDuration);
+
+        // Lance le fade-out juste avant la fin du clip
+        float delay = Mathf.Max(0, musicSource.clip.length - fadeDuration);
+        DOVirtual.DelayedCall(delay, () =>
+            musicSource.DOFade(0f, fadeDuration)
+        );
+    }
     public void VolumeSlider(Slider slider)
     {
         AudioListener.volume = slider.value;
