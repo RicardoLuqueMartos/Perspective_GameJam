@@ -51,7 +51,7 @@ public class RayonEmission : MonoBehaviour
                 if (hit.collider.CompareTag("Player"))
                 {
                     Debug.Log("Rayon hit & kill Player");
-                    PlayerController.instance.KillPlayer();
+                    RBPlayer.instance.KillPlayer();
                     return;
                 }
                 else if(!hit.collider.CompareTag("Reflecteur"))
@@ -155,7 +155,7 @@ public class RayonEmission : MonoBehaviour
                 if (hits[hits.Count - 1].collider.CompareTag("Player"))
                 {
                     Debug.Log("Rayon hits & kills Player");
-                    PlayerController.instance.KillPlayer();
+                    RBPlayer.instance.KillPlayer();
                     return;
                 }
             //    else Debug.Log("Rayon ending on " + hits[hits.Count - 1].collider.name);
