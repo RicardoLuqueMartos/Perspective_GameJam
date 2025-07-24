@@ -46,7 +46,7 @@ public class ConsoleInteract : MonoBehaviour, IInteractable
 
     public void IsInteractable(RaycastHit hit)
     {
-        if (hit.collider != null)
+        if (hit.collider != null && this.enabled)
         {
             UiManager.instance.contectuelInteracted(contextuelTXT);
         }
@@ -54,12 +54,14 @@ public class ConsoleInteract : MonoBehaviour, IInteractable
 
     public void Interact(PlayerInteract player)
     {
-        UiManager.instance.OpenCameraConsole(this);
-        _isControlled = true;
-        player.isInteracting = true;
-        _playerInteract = player;
-        _playerInteract.interactingTarget = this;
-        
+        if (this.enabled)
+        {
+            UiManager.instance.OpenCameraConsole(this);
+            _isControlled = true;
+            player.isInteracting = true;
+            _playerInteract = player;
+            _playerInteract.interactingTarget = this;
+        }
     }
 
     public void LeaveInteract()
