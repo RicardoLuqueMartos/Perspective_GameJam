@@ -38,3 +38,4 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 2f8be899b030baa4e953b7295456bd25, type: 3}
   structureMove: {fileID: 8300000, guid: e374c23607b343d4ebdd07e2f9e376c9, type: 3}
   turrentMove: {fileID: 8300000, guid: 6dedb6ff7e40e7f499815ef0d4d4b558, type: 3}
+  dissolve: {fileID: 8300000, guid: 753ecc7614eb30640b506f031d158bf6, type: 3}

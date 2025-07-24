@@ -14,4 +14,5 @@ public class SoundData : ScriptableObject
     public AudioClip[] recepteurPowerOff;
     public AudioClip structureMove;
     public AudioClip turrentMove;
+    public AudioClip dissolve;
 }

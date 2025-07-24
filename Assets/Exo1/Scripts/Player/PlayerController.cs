@@ -10,7 +10,8 @@ using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
- //   public bool IsInteracting;
+    public Material material; // Material for the dissolve effect
+                              //   public bool IsInteracting;
     public bool useDoubleJump = false;
     [SerializeField] private bool CanWalk = false;
     [SerializeField] private bool isOnGround = false;
@@ -238,6 +239,10 @@ public class PlayerController : MonoBehaviour
     {
         UiManager.instance.fadingPanel.enabled = true;
         UiManager.instance.fadingPanel.DOFade(1, 1);
+        material.DOFloat(1.1f, "_dissolveAmount", 2f).SetEase(Ease.InOutQuad); // Start with dissolve effect
+        SoundLauncher.instance.PlayDissolve();
+
+        
         yield return new WaitForSeconds(2);
 
         // Désactivation du CharacterController avant de déplacer le joueur
@@ -250,6 +255,8 @@ public class PlayerController : MonoBehaviour
         if (controller != null) controller.enabled = true;
 
         UiManager.instance.fadingPanel.DOFade(0, 2);
+        material.DOFloat(0.1f, "_dissolveAmount", 2f).SetEase(Ease.InOutQuad); // resummoning disolve
+        SoundLauncher.instance.PlayDissolve();
         yield return new WaitForSeconds(2);
         UiManager.instance.fadingPanel.enabled = false;
         yield break;
