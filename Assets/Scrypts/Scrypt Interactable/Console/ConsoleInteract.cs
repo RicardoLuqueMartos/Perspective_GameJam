@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class ConsoleInteract : MonoBehaviour, IInteractable
 {
+    public bool StartAlimented = true;
+
     public List<Camera> camerasList = new List<Camera>();
     public List<ReflecteurMovable> LinkedReflectorsList = new List<ReflecteurMovable>();
 
@@ -19,9 +21,22 @@ public class ConsoleInteract : MonoBehaviour, IInteractable
     public RawImage ConsoleCamImage;
     public Image ConsoleImage;
 
+    void Start()
+    {
+        SetAlimented(StartAlimented);
+    }
+
+
     void OnEnable()
     {
         Invoke("GenerateFirstCameraView", 1);
+
+    }
+
+    public void SetAlimented(bool alimented)
+    {
+        ConsoleCamImage.transform.parent.parent.gameObject.SetActive(alimented);
+        enabled = alimented;
     }
 
     public bool isControlled()

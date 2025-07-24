@@ -5,16 +5,21 @@ using DG.Tweening;
 
 public class Deadzone : MonoBehaviour
 {
+    public bool StartAlimented = true;
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        if (StartAlimented)
+        {
+            SetAlimented(StartAlimented);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetAlimented(bool alimented)
     {
-        
+        gameObject.SetActive(alimented);
     }
 
     public void OnTriggerEnter(Collider other)

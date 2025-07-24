@@ -1,31 +1,93 @@
 using DG.Tweening;
+using JetBrains.Annotations;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using static Unity.VisualScripting.Member;
 
+public enum ObjectToAllimentTypeEnum
+{
+    Move, TurnOnConsole, TurnOffConsole, TurnOnRayon, TurnOffRayon, Appear, Hide
+}
+
 public class ObjectToAlliment : MonoBehaviour
 {
+
+    [SerializeField] ObjectToAllimentTypeEnum type = ObjectToAllimentTypeEnum.Move;
     bool powered = false;
+    [Header("console Interact type")]
+    [SerializeField] List<ConsoleInteract> consoleInteractsList = new();
+    [Header("console Interact type")]
+    [SerializeField] List<Deadzone> deadZonesList = new();
+
+    [Header("Move type")]
     [SerializeField] Transform transformOn;
     [SerializeField] Transform transformOff;
     [SerializeField] float timeToMove = 1;
+
+    [Header("audio")]
     [SerializeField] AudioSource audioSourceON;
     [SerializeField] AudioSource audioSourceOFF;
 
     bool moving;
 
     [SerializeField] ReccepteurRayon[] reccepteurRayons;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created  
-    void Start()
-    {
+    
 
+    public void CheckAllimentation()
+    {
+        powered = true;
+
+        for (int i = 0; i < reccepteurRayons.Length; i++)
+        {
+            if (!reccepteurRayons[i].powered)
+            {
+                powered = false;
+                break;
+            }
+        }
+
+        if (powered)
+        {
+            if (type == ObjectToAllimentTypeEnum.Move)
+                SetPositionOn();
+            else if (type == ObjectToAllimentTypeEnum.TurnOnConsole)
+                SetConsoles(true);
+            else if (type == ObjectToAllimentTypeEnum.TurnOffConsole)
+                SetConsoles(false);
+            else if (type == ObjectToAllimentTypeEnum.TurnOnRayon)
+                SetRayons(true);
+            else if (type == ObjectToAllimentTypeEnum.TurnOffRayon)
+                SetRayons(false);
+        }
+        else
+        {
+            if (type == ObjectToAllimentTypeEnum.Move)
+                SetPositionOff();
+        }
     }
 
-    // Update is called once per frame  
-    void Update()
+    #region Move Console functions
+    public void SetConsoles(bool setToOn)
     {
+        for (int i = 0; i< consoleInteractsList.Count; i++)
+        {
+            if (consoleInteractsList[i] != null)
+                consoleInteractsList[i].SetAlimented(setToOn);
+        }
     }
 
+    public void SetRayons(bool setToOn)
+    {
+        for (int i = 0; i < deadZonesList.Count; i++)
+        {
+            if (deadZonesList[i] != null)
+                deadZonesList[i].SetAlimented(setToOn);
+        }
+    }
+    #endregion Move Console functions
+
+    #region Move functions
     public void SetPositionOn()
     {
         if (audioSourceOFF != null && audioSourceOFF.isPlaying)
@@ -76,27 +138,6 @@ public class ObjectToAlliment : MonoBehaviour
             transform.DORotate(transformOff.rotation.eulerAngles, timeToMove);
         }
     }
+    #endregion Move functions
 
-    public void CheckAllimentation()
-    {
-        powered = true;
-
-        for (int i = 0; i < reccepteurRayons.Length; i++)
-        {
-            if (!reccepteurRayons[i].powered)
-            {
-                powered = false;
-                break;
-            }
-        }
-
-        if (powered)
-        {
-            SetPositionOn();
-        }
-        else
-        {
-            SetPositionOff();
-        }
-    }
 }
