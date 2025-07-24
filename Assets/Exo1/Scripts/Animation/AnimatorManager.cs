@@ -72,7 +72,7 @@ public class AnimatorManager : MonoBehaviour
 
     private void OnAnimatorMove()
     {
-        if (playerController.UsingRootMotion)
+     /*   if (playerController.UsingRootMotion)
         {
             playerController.rigidBody.linearDamping = 0;
             Vector3 deltaPosition = animator.deltaPosition;
@@ -80,6 +80,6 @@ public class AnimatorManager : MonoBehaviour
             Vector3 velocity = deltaPosition / Time.deltaTime;
             playerController.rigidBody.angularVelocity = velocity;
 
-        }
+        }*/
     }
 }

@@ -45,6 +45,7 @@ public class CameraConsole : MonoBehaviour
 
     private void OnEnable()
     {
+        RBPlayer.instance.canRotate = false;
         Cursor.lockState = CursorLockMode.None;
         UiManager.instance.Hidecontectuel();
         InitRenderTexturesList();
@@ -53,7 +54,8 @@ public class CameraConsole : MonoBehaviour
     }
     private void OnDisable()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Locked; 
+        RBPlayer.instance.canRotate = true;
     }
 
     public void OpenCameraConsole(ConsoleInteract _consoleInteract)

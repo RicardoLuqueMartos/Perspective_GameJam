@@ -5,6 +5,7 @@ using UnityEngine.UIElements;
 
 public class PlayerInteract : MonoBehaviour
 {
+ //   public bool useSphereCast = true;
     [SerializeField] private float interactDistance = 1f; 
     [SerializeField] private float SphereDiameter = .1f;
     [SerializeField] private float interactDistanceMax = 1f;
@@ -57,7 +58,7 @@ public class PlayerInteract : MonoBehaviour
                     currentTarget.IsInteractable(hit);
                     if (Input.GetKeyDown(KeyCode.E)/* PlayerController.instance.IsInteracting*/)
                     {
-
+                        Debug.Log(hit.transform.name);
 
                         if (!currentTarget.isControlled())
                         {
@@ -69,6 +70,7 @@ public class PlayerInteract : MonoBehaviour
                         }
                         else
                         {
+                            Debug.Log("LeaveInteract " + hit.transform.name);
                             currentTarget.LeaveInteract();
                         }
                     }

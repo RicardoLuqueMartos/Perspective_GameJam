@@ -37,7 +37,7 @@ public class RBPlayer : MonoBehaviour
 
     private bool canMove = true;
     public bool canRotate = true;
-
+    public AnimatorManager animatorManager;
     [SerializeField] bool correctInclination = true;
     [Range(0.01f, .5f)][SerializeField] float inclinationCorrectionSpeed = .1f;
 
@@ -107,7 +107,8 @@ public class RBPlayer : MonoBehaviour
         }
 
         characterController.Move(moveDirection * Time.deltaTime);
-
+     //   if (!isJumping) 
+            animatorManager.UpdateAnimatorValues(curSpeedZ, curSpeedX, false, false);
         if (canRotate)
         {
             rotationX += -Input.GetAxis("Mouse Y") * lookSpeed;
@@ -137,7 +138,13 @@ public class RBPlayer : MonoBehaviour
 
         }
     }
-       
+    void SendJumpToAnimator()
+    {
+        animatorManager.animator.SetBool("IsGrounded", false);
+        animatorManager.animator.SetBool("Jumping", true);
+        animatorManager.PlayTargetAnimation("Jump_Run", false, false);
+    }
+
     public void LockMovements()
     {
         canMove = false;    

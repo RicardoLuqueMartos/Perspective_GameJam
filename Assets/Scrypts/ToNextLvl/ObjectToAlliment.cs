@@ -19,6 +19,8 @@ public class ObjectToAlliment : MonoBehaviour
     [SerializeField] List<ConsoleInteract> consoleInteractsList = new();
     [Header("console Interact type")]
     [SerializeField] List<Deadzone> deadZonesList = new();
+    [Header("console Interact type")]
+    [SerializeField] List<ObjectToAlliment> AppearsList = new();
 
     [Header("Move type")]
     [SerializeField] Transform transformOn;
@@ -59,6 +61,10 @@ public class ObjectToAlliment : MonoBehaviour
                 SetRayons(true);
             else if (type == ObjectToAllimentTypeEnum.TurnOffRayon)
                 SetRayons(false);
+            else if (type == ObjectToAllimentTypeEnum.Appear)
+                SetAppear(true);
+            else if (type == ObjectToAllimentTypeEnum.Hide)
+                SetAppear(false);
         }
         else
         {
@@ -67,7 +73,6 @@ public class ObjectToAlliment : MonoBehaviour
         }
     }
 
-    #region Move Console functions
     public void SetConsoles(bool setToOn)
     {
         for (int i = 0; i< consoleInteractsList.Count; i++)
@@ -85,7 +90,15 @@ public class ObjectToAlliment : MonoBehaviour
                 deadZonesList[i].SetAlimented(setToOn);
         }
     }
-    #endregion Move Console functions
+
+    public void SetAppear(bool setToOn)
+    {
+        for (int i = 0; i < AppearsList.Count; i++)
+        {
+            if (AppearsList[i] != null)
+                AppearsList[i].gameObject.SetActive(setToOn);
+        }
+    }
 
     #region Move functions
     public void SetPositionOn()

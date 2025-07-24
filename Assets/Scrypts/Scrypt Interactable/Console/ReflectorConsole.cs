@@ -31,7 +31,7 @@ public class ReflectorConsole : MonoBehaviour
         else CameraConsole.instance.consoleInteract.ReflectorIndex++;
         
         DisplayIndex();
-        AssignSelectedReflector();
+    //    AssignSelectedReflector();
     }
 
     public void PreviousReflector()
@@ -41,16 +41,18 @@ public class ReflectorConsole : MonoBehaviour
         else CameraConsole.instance.consoleInteract.ReflectorIndex--;
        
         DisplayIndex();
-        AssignSelectedReflector();
+    //    AssignSelectedReflector();
     }
 
     public void DisplayIndex()
     {
         indexText.text = (CameraConsole.instance.consoleInteract.ReflectorIndex+1).ToString();
+        AssignSelectedReflector();
     }
 
     void AssignSelectedReflector()
     {
-        UiManager.instance.selectedReflector = CameraConsole.instance.consoleInteract.LinkedReflectorsList[CameraConsole.instance.consoleInteract.ReflectorIndex];        
+        UiManager.instance.selectedReflector = CameraConsole.instance.consoleInteract.LinkedReflectorsList[CameraConsole.instance.consoleInteract.ReflectorIndex];
+        UiManager.instance.selectedReflector.moveForce = GameSettingsManager.instance.gameSettingsData.ReflectorMoveForce;
     }
 }

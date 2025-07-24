@@ -4323,6 +4323,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameSettingsData: {fileID: 11400000, guid: 04083ff69acbb5d4d979713fb6279ba7, type: 2}
+  centerCursorImage: {fileID: 391238700944484046}
   cameraConsole: {fileID: 1397890742600159763}
   selectedReflector: {fileID: 0}
   GameMenuObject: {fileID: 7305684282257650698}
