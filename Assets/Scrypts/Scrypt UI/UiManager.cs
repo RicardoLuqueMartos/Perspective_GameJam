@@ -24,6 +24,8 @@ public class UiManager : MonoBehaviour
     [SerializeField] GameObject BaseControlsInfo;
     [SerializeField] GameObject ReflectorsControlsInfo;
 
+    public GameObject WinPanel;
+
     void Start()
     {
         if (instance == null)
@@ -148,6 +150,16 @@ public class UiManager : MonoBehaviour
         GameMenuObject.SetActive(true);
         if (SoundLauncher.instance != null)
             SoundLauncher.instance.PlayClickButton();
+    }
+
+    public void DisplayWinPanel()
+    {
+        centerCursorImage.gameObject.SetActive(false);
+        HideAllControlsInfos();
+        Cursor.lockState = CursorLockMode.None;
+        if (SoundLauncher.instance != null)
+            SoundLauncher.instance.PlayRecepteurPowerOn();
+        WinPanel.SetActive(true);
     }
 
     public void HideMenu()
