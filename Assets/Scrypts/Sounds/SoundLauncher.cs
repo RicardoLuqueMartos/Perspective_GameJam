@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System.Globalization;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +10,7 @@ public class SoundLauncher : MonoBehaviour
     [SerializeField] AudioSource audioSource;
     [SerializeField] AudioSource turretSource;
     [SerializeField] AudioSource bouttonSource;
+    [SerializeField] AudioSource dissolveSource;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -108,6 +110,15 @@ public class SoundLauncher : MonoBehaviour
         {
             AudioClip clip = soundData.turrentMove;
             turretSource.PlayOneShot(clip);
+        }
+    }
+
+    public void PlayDissolve()
+    {
+        if (soundData.dissolve != null)
+        {
+            AudioClip clip = soundData.dissolve;
+            dissolveSource.PlayOneShot(clip);
         }
     }
 
