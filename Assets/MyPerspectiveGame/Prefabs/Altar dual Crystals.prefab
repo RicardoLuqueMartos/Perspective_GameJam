@@ -970,8 +970,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94c195dcffdd00b499fe3c6a7e0e0815, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  contextuelTXT_needTeserac: Need Teserac
-  contextuelTXT_empty: Press E to insert Teresac
+  contextuelTXT_needTeserac: Need Tesseract
+  contextuelTXT_empty: Press E to insert Tesseract
   contextuelTXT_full: 
   rayon: {fileID: 540933886886381514}
   rayonsList:

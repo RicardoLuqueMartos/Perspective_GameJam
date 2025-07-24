@@ -15,5 +15,5 @@ public class SoundData : ScriptableObject
     public AudioClip structureMove;
     public AudioClip turrentMove;
     public AudioClip dissolve;
-    public AudioClip musicFond;
+    public AudioClip[] musicsFond;
 }
