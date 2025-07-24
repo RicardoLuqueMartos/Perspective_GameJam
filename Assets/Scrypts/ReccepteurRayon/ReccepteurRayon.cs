@@ -4,6 +4,8 @@ public class ReccepteurRayon : MonoBehaviour
 {
     [SerializeField] ObjectToAlliment[] objectToAlliments;
 
+    [SerializeField] Teleporter teleporter;
+
 
     [SerializeField] public bool powered;
     [SerializeField] Material materialOFF;
@@ -32,17 +34,31 @@ public class ReccepteurRayon : MonoBehaviour
         {
             renderer.material = materialON; // Change color to ON material when powered
             SoundLauncher.instance.PlayRecepteurPowerOn();
-            for (int i = 0; i < objectToAlliments.Length; i++)
+            if (objectToAlliments.Length > 0)
+            { 
+                for (int i = 0; i < objectToAlliments.Length; i++)
+                {
+                    objectToAlliments[i].CheckAllimentation();
+                }
+            }
+            if (teleporter != null)
             {
-                objectToAlliments[i].CheckAllimentation();
+                teleporter.CheckAllimentation();
             }
         }
         else
         {
             renderer.material = materialOFF; // Change color to OFF material when not powered
-            for (int i = 0; i < objectToAlliments.Length; i++)
+            if (objectToAlliments.Length > 0)
             {
-                objectToAlliments[i].CheckAllimentation();
+                for (int i = 0; i < objectToAlliments.Length; i++)
+                {
+                    objectToAlliments[i].CheckAllimentation();
+                }
+            }
+            if (teleporter != null)
+            {
+                teleporter.CheckAllimentation();
             }
         }
 
