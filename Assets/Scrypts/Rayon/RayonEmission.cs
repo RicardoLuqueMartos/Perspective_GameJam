@@ -44,7 +44,7 @@ public class RayonEmission : MonoBehaviour
             {
                 rayonRenderer.positionCount = 2;
                 rayonRenderer.SetPosition(0, transform.position);
-                rayonRenderer.SetPosition(1, transform.position + transform.forward * 100f); // Default length if no hit  
+                rayonRenderer.SetPosition(1, transform.position + transform.forward * GameSettingsManager.instance.gameSettingsData.RayLengthNoHit); // Default length if no hit  
             }
             else
             {
@@ -59,7 +59,11 @@ public class RayonEmission : MonoBehaviour
                     rayonRenderer.positionCount = 2;
                     rayonRenderer.SetPosition(0, transform.position);
                     rayonRenderer.SetPosition(1, hit.point);
+                 
+                    if (hit.collider != null && hit.collider.GetComponent<ReccepteurRayon>())
+                        EnpowerReceptor(hit);
                 }
+               
                 else
                 {
                     hits.Add(hit);
@@ -75,19 +79,18 @@ public class RayonEmission : MonoBehaviour
                         Vector3 startPoint = lastHit.point + newDirection * 0.01f; // Offset pour éviter le décalage
                         Physics.Raycast(startPoint, newDirection, out RaycastHit newhit);
                         //Debug.DrawRay(lastHit.point, lastHit.normal, Color.red, 2f);
-                       if (newhit.collider != null && !newhit.collider.CompareTag("Reflecteur"))
+                        if (newhit.collider != null && !newhit.collider.CompareTag("Reflecteur"))
                         {
                             hits.Add(newhit);
                             break;
                         }
                         else if (newhit.collider != null && newhit.collider.CompareTag("Reflecteur"))
                         {
-                        //    Debug.Log("Rayon hit reflector: " + newhit.collider.name);
+                            //    Debug.Log("Rayon hit reflector: " + newhit.collider.name);
                             hits.Add(newhit);
                             currentDirection = newDirection;
                             lastHit = newhit;
                         }
-
                         else if (newhit.collider == null)
                         {
                             directionWithOutHit = newDirection;
@@ -133,7 +136,8 @@ public class RayonEmission : MonoBehaviour
                     {
                         RaycastHit lastHitOnSurface = hits[hits.Count - 1];
 
-                        if (lastHitOnSurface.collider.GetComponent<ReccepteurRayon>())
+                        EnpowerReceptor(lastHitOnSurface);
+                   /*     if (lastHitOnSurface.collider.GetComponent<ReccepteurRayon>())
                         { 
                             currentReccepteurRayon = lastHitOnSurface.collider.GetComponent<ReccepteurRayon>();
                             if (!currentReccepteurRayon.powered)
@@ -143,7 +147,7 @@ public class RayonEmission : MonoBehaviour
                         {
                             currentReccepteurRayon.SetPowered(false);
                             currentReccepteurRayon = null;
-                        }
+                        }*/
                     }
                 }
             }
@@ -157,6 +161,21 @@ public class RayonEmission : MonoBehaviour
             //    else Debug.Log("Rayon ending on " + hits[hits.Count - 1].collider.name);
             }
         //    else Debug.Log("RayonRenderer has no hits, setting to default length.");
+        }
+    }
+
+    void EnpowerReceptor(RaycastHit lastHitOnSurface)
+    {
+        if (lastHitOnSurface.collider.GetComponent<ReccepteurRayon>())
+        {
+            currentReccepteurRayon = lastHitOnSurface.collider.GetComponent<ReccepteurRayon>();
+            if (!currentReccepteurRayon.powered)
+                currentReccepteurRayon.SetPowered(true);
+        }
+        else if (currentReccepteurRayon != null)
+        {
+            currentReccepteurRayon.SetPowered(false);
+            currentReccepteurRayon = null;
         }
     }
 

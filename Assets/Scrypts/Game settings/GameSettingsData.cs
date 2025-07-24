@@ -2,12 +2,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering;
 using UnityEngine.UI;
+using static UnityEditorInternal.ReorderableList;
 
 [CreateAssetMenu(fileName = "GameSettingsData", menuName = "Scriptable Objects/GameSettingsData")]
 public class GameSettingsData : ScriptableObject
 {
     public Sprite tesseractSprite;
-
+    public float RayLengthNoHit = 200f;
     public int ReflectorMoveForce = 10;
     [Header("Console texture Settings")]
     public Sprite ConsoleWithReflectorsImage;

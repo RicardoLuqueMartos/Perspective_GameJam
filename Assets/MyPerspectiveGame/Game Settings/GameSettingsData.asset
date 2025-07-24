@@ -16,8 +16,8 @@ MonoBehaviour:
   ReflectorMoveForce: 5
   ConsoleWithReflectorsImage: {fileID: 21300000, guid: b2db1bdcb71ffb345bc85247f217b1b3, type: 3}
   ConsoleWithoutReflectorsImage: {fileID: 21300000, guid: 2fc59e4cc3f364e40990d9307b713220, type: 3}
-  renderTextureCurrentSizeX: 854
-  renderTextureCurrentSizeY: 480
+  renderTextureCurrentSizeX: 1280
+  renderTextureCurrentSizeY: 720
   m_filterMode: 0
-  format: 8
+  format: 40
   depthFormat: 94

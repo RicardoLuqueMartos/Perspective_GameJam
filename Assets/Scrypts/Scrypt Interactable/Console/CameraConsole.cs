@@ -94,6 +94,8 @@ public class CameraConsole : MonoBehaviour
         if (GameSettingsManager.instance.gameSettingsData.renderTextureCurrentSizeX == 0 || GameSettingsManager.instance.gameSettingsData.renderTextureCurrentSizeY == 0)
             return null;
 
+     //   GraphicsFormat gfxFormat = GraphicsFormat.argb
+
         // The RenderTextureReadWrite setting is purposely omitted in order to get the "Default" behavior.
         RenderTexture texture = new (GameSettingsManager.instance.gameSettingsData.renderTextureCurrentSizeX, GameSettingsManager.instance.gameSettingsData.renderTextureCurrentSizeY
             , 24, GameSettingsManager.instance.gameSettingsData.format)

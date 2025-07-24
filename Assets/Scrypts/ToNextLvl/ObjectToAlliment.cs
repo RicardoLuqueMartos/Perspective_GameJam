@@ -15,11 +15,11 @@ public class ObjectToAlliment : MonoBehaviour
 
     [SerializeField] ObjectToAllimentTypeEnum type = ObjectToAllimentTypeEnum.Move;
     bool powered = false;
-    [Header("console Interact type")]
+    [Header("console type")]
     [SerializeField] List<ConsoleInteract> consoleInteractsList = new();
-    [Header("console Interact type")]
+    [Header("deadZone type")]
     [SerializeField] List<Deadzone> deadZonesList = new();
-    [Header("console Interact type")]
+    [Header("Appear type")]
     [SerializeField] List<ObjectToAlliment> AppearsList = new();
 
     [Header("Move type")]
@@ -53,24 +53,25 @@ public class ObjectToAlliment : MonoBehaviour
         {
             if (type == ObjectToAllimentTypeEnum.Move)
                 SetPositionOn();
-            else if (type == ObjectToAllimentTypeEnum.TurnOnConsole)
-                SetConsoles(true);
-            else if (type == ObjectToAllimentTypeEnum.TurnOffConsole)
-                SetConsoles(false);
-            else if (type == ObjectToAllimentTypeEnum.TurnOnRayon)
-                SetRayons(true);
-            else if (type == ObjectToAllimentTypeEnum.TurnOffRayon)
-                SetRayons(false);
-            else if (type == ObjectToAllimentTypeEnum.Appear)
-                SetAppear(true);
-            else if (type == ObjectToAllimentTypeEnum.Hide)
-                SetAppear(false);
         }
         else
         {
             if (type == ObjectToAllimentTypeEnum.Move)
                 SetPositionOff();
         }
+
+        if (type == ObjectToAllimentTypeEnum.TurnOnConsole)
+            SetConsoles(powered);
+        else if (type == ObjectToAllimentTypeEnum.TurnOffConsole)
+            SetConsoles(!powered);
+        else if (type == ObjectToAllimentTypeEnum.TurnOnRayon)
+            SetRayons(powered);
+        else if (type == ObjectToAllimentTypeEnum.TurnOffRayon)
+            SetRayons(!powered);
+        else if (type == ObjectToAllimentTypeEnum.Appear)
+            SetAppear(powered);
+        else if (type == ObjectToAllimentTypeEnum.Hide)
+            SetAppear(!powered);
     }
 
     public void SetConsoles(bool setToOn)
