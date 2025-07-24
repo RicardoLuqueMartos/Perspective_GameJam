@@ -23,6 +23,7 @@ public class PlayerInteract : MonoBehaviour
         LeaveInteractByDistance();
     }
 
+
     void RayDetectInteractable()
     {
         //hit = new RaycastHit();

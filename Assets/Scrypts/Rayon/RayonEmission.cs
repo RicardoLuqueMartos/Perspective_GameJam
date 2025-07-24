@@ -162,6 +162,7 @@ public class RayonEmission : MonoBehaviour
 
     public void TurnOn()
     {
+        rayonRenderer = GetComponent<LineRenderer>();
         powered = true ;
         rayonRenderer.enabled = true;
         SoundLauncher.instance.PlayAltarPowerOn();
