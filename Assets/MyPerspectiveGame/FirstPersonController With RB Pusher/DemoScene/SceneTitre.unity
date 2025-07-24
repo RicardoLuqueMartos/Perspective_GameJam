@@ -443,7 +443,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Light \nof\nSight"
+  m_text: 'Sight
+
+    of
+
+    light'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 806b62fbee67998419de7efabe5ac941, type: 2}
   m_sharedMaterial: {fileID: 2140474, guid: 806b62fbee67998419de7efabe5ac941, type: 2}

@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -44,6 +45,8 @@ public class RBPlayer : MonoBehaviour
     public static RBPlayer instance;
 
     public Material material;
+
+    private Coroutine playerKill;
 
     private void Awake()
     {
@@ -165,5 +168,38 @@ public class RBPlayer : MonoBehaviour
         canRotate = true;
     }
 
+
+
+    public void KillPlayer()
+    {
+        if (playerKill == null)
+        playerKill = StartCoroutine(FadeOutToRespawn());
+    }
+    public IEnumerator FadeOutToRespawn()
+    {
+        UiManager.instance.fadingPanel.enabled = true;
+        UiManager.instance.fadingPanel.DOFade(1, 1);
+        RBPlayer.instance.material.DOFloat(1.1f, "_dissolveAmount", 2f).SetEase(Ease.InOutQuad); // Start with dissolve effect
+        SoundLauncher.instance.PlayDissolve();
+
+
+        yield return new WaitForSeconds(2);
+
+        // Désactivation du CharacterController avant de déplacer le joueur
+
+
+        RBPlayer.instance.gameObject.transform.position = GameProgressManager.instance.currentRespawnTransform.position;
+
+        // Réactivation du CharacterController après le déplacement
+
+
+        UiManager.instance.fadingPanel.DOFade(0, 2);
+        RBPlayer.instance.material.DOFloat(0.1f, "_dissolveAmount", 2f).SetEase(Ease.InOutQuad); // resummoning disolve
+        SoundLauncher.instance.PlayDissolve();
+        yield return new WaitForSeconds(2);
+        UiManager.instance.fadingPanel.enabled = false;
+        playerKill = null;
+        yield break;
+    }
 }
 
