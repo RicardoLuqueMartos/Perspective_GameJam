@@ -38,14 +38,14 @@ public class ObjectToAlliment : MonoBehaviour
 
         }
 
-        if (audioSourceON != null)
+        if (audioSourceON != null && transformOn != null)
         {
             transform.DOMove(transformOn.position, timeToMove)
             .OnComplete(() => audioSourceON.Stop());
             transform.DORotate(transformOn.rotation.eulerAngles, timeToMove)
             .OnComplete(() => audioSourceON.Stop());
         }
-        else
+        else if (transformOn != null)
         {
             transform.DOMove(transformOn.position, timeToMove);
             transform.DORotate(transformOn.rotation.eulerAngles, timeToMove);
@@ -63,14 +63,14 @@ public class ObjectToAlliment : MonoBehaviour
             SoundLauncher.instance.PlayStructureMove(audioSourceOFF); 
         
         }
-        if (audioSourceOFF != null)
+        if (audioSourceOFF != null && transformOff != null)
         {
             transform.DOMove(transformOff.position, timeToMove)
             .OnComplete(() => audioSourceOFF.Stop());
             transform.DORotate(transformOff.rotation.eulerAngles, timeToMove)
             .OnComplete(() => audioSourceOFF.Stop());
         }
-        else
+        else if (transformOff != null)
         {
             transform.DOMove(transformOff.position, timeToMove);
             transform.DORotate(transformOff.rotation.eulerAngles, timeToMove);
