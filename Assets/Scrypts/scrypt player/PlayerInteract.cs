@@ -8,6 +8,7 @@ public class PlayerInteract : MonoBehaviour
     [SerializeField] private float interactDistance = 1f;
     [SerializeField] private float interactDistanceMax = 1f;
     [SerializeField] private LayerMask interactable;
+
     private RaycastHit hit;
     private IInteractable currentTarget;
     public IInteractable interactingTarget;
@@ -19,15 +20,23 @@ public class PlayerInteract : MonoBehaviour
 
     private void Update()
     {
-        ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+     //   ray = mainCam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+        ray.origin = transform.position;
+        ray.direction = transform.forward;
+        RayDetectInteractable();
     }
     void FixedUpdate()
     {
-        RayDetectInteractable();
 
         LeaveInteractByDistance();
     }
 
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawRay(ray);
+    }
 
     void RayDetectInteractable()
     {
@@ -40,7 +49,7 @@ public class PlayerInteract : MonoBehaviour
             return;
         }
 
-        if (Physics.Raycast(ray, out hit, interactDistance, interactable)){
+        if (Physics.Raycast(transform.position, transform.forward, out hit, interactDistance, interactable)){
              if (hit.collider != null)
             {
                 currentTarget = hit.collider.GetComponent<IInteractable>();
