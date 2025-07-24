@@ -5,42 +5,48 @@ using UnityEngine.UIElements;
 
 public class PlayerInteract : MonoBehaviour
 {
-    [SerializeField] private float interactDistance = 1f;
+    [SerializeField] private float interactDistance = 1f; 
+    [SerializeField] private float SphereDiameter = .1f;
     [SerializeField] private float interactDistanceMax = 1f;
     [SerializeField] private LayerMask interactable;
+
     private RaycastHit hit;
     private IInteractable currentTarget;
     public IInteractable interactingTarget;
 
     public bool isInteracting = false;
     Ray ray;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-
 
     private void Update()
     {
-        ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+     //   ray = mainCam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+    ////    ray.direction = transform.forward;
+        RayDetectInteractable();
     }
     void FixedUpdate()
     {
-        RayDetectInteractable();
 
         LeaveInteractByDistance();
     }
 
 
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawRay(ray);
+    }
+
     void RayDetectInteractable()
     {
-        //hit = new RaycastHit();
-        //Physics.Raycast(transform.position , transform.forward, out hit, interactDistance, interactable);
-
         if (interactingTarget != null && Input.GetKeyDown(KeyCode.E) /*PlayerController.instance.IsInteracting*/)
         {
             LeaveInteractByKey();            
             return;
         }
-
-        if (Physics.Raycast(ray, out hit, interactDistance, interactable)){
+        RaycastHit hit;
+        if (Physics.SphereCast(transform.position,
+            SphereDiameter, transform.forward, out hit, interactDistance, interactable))
+            {
              if (hit.collider != null)
             {
                 currentTarget = hit.collider.GetComponent<IInteractable>();

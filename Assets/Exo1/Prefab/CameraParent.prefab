@@ -152,6 +152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactDistance: 7
+  SphereDiameter: 0.2
   interactDistanceMax: 7
   interactable:
     serializedVersion: 2
