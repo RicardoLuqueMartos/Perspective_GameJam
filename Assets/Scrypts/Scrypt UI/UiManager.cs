@@ -152,6 +152,7 @@ public class UiManager : MonoBehaviour
     {
         centerCursorImage.gameObject.SetActive(false);  
         HideAllControlsInfos();
+        if (RBPlayer.instance != null)
         RBPlayer.instance.canRotate = false;
         Cursor.lockState = CursorLockMode.None;
         GameMenuObject.SetActive(true);
@@ -173,6 +174,7 @@ public class UiManager : MonoBehaviour
     {
         centerCursorImage.gameObject.SetActive(true);
         DisplayBaseControlsInfo();
+        if (RBPlayer.instance != null);
         RBPlayer.instance.canRotate = true;
         Cursor.lockState = CursorLockMode.Locked;
         GameMenuObject.SetActive(false);

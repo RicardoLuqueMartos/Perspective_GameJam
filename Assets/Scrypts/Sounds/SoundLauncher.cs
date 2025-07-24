@@ -38,6 +38,7 @@ public class SoundLauncher : MonoBehaviour
 
     private void PlayMusicWithAutoFadeOut(float fadeDuration)
     {
+        musicSource.clip = soundData.musicsFond[Random.Range(0, soundData.musicsFond.Length-1)];
         musicSource.Play();
         musicSource.DOFade(1f, fadeDuration);
 

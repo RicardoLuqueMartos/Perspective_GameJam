@@ -27,7 +27,7 @@ public class Deadzone : MonoBehaviour
         }
         if (other.gameObject.CompareTag("Player"))
         {
-            PlayerController.instance.KillPlayer();
+            KillPlayer();
         }
     }
 
