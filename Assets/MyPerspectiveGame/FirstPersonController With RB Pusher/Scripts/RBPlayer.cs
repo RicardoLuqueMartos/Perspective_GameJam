@@ -43,6 +43,8 @@ public class RBPlayer : MonoBehaviour
 
     public static RBPlayer instance;
 
+    public Material material;
+
     private void Awake()
     {
         CreateInstance();

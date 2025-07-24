@@ -41,6 +41,12 @@ public class UiManager : MonoBehaviour
         HideMenu();
     }
 
+    private void OnEnable()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
+
     private void Update()
     {
         /*if (Input.GetKeyDown(KeyCode.E) && selectedReflector != null)
@@ -146,6 +152,7 @@ public class UiManager : MonoBehaviour
     {
         centerCursorImage.gameObject.SetActive(false);  
         HideAllControlsInfos();
+        RBPlayer.instance.canRotate = false;
         Cursor.lockState = CursorLockMode.None;
         GameMenuObject.SetActive(true);
         if (SoundLauncher.instance != null)
@@ -166,6 +173,7 @@ public class UiManager : MonoBehaviour
     {
         centerCursorImage.gameObject.SetActive(true);
         DisplayBaseControlsInfo();
+        RBPlayer.instance.canRotate = true;
         Cursor.lockState = CursorLockMode.Locked;
         GameMenuObject.SetActive(false);
         if (SoundLauncher.instance != null)

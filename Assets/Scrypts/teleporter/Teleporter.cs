@@ -29,6 +29,8 @@ public class Teleporter : MonoBehaviour
         
     }
 
+
+
     public void CheckAllimentation()
     {
         powered = true;
@@ -66,8 +68,8 @@ public class Teleporter : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Player entered the teleporter trigger zone.");
-        if (powered)
+       
+        if (powered && other.gameObject.CompareTag("Player"))
         {
             StartCoroutine(TeleportPlayer());
         }
@@ -76,24 +78,24 @@ public class Teleporter : MonoBehaviour
 
     public IEnumerator TeleportPlayer()
     {
-        Debug.Log("Teleporting player to destination: " + destination.position);
+        //Debug.Log("Teleporting player to destination: " + destination.position);
         UiManager.instance.fadingPanel.enabled = true;
         UiManager.instance.fadingPanel.DOFade(1, 1);
         SoundLauncher.instance.PlayDissolve();
-        var controller = PlayerController.instance;
+        var controller = RBPlayer.instance;
         if (controller != null) controller.enabled = false;
-        PlayerController.instance.material.DOFloat(1.1f, "_dissolveAmount", 2f).SetEase(Ease.InOutQuad); // Start with dissolve effect
+        RBPlayer.instance.material.DOFloat(1.1f, "_dissolveAmount", 2f).SetEase(Ease.InOutQuad); // Start with dissolve effect
         yield return new WaitForSeconds(2);
 
         // Désactivation du CharacterController avant de déplacer le joueur
 
 
-        PlayerController.instance.gameObject.transform.position = destination.position;
+        RBPlayer.instance.gameObject.transform.position = destination.position;
         GameProgressManager.instance.currentRespawnTransform = destination;
 
         // Réactivation du CharacterController après le déplacement
 
-        PlayerController.instance.material.DOFloat(0.1f, "_dissolveAmount", 2f).SetEase(Ease.InOutQuad); // resummoning disolve
+        RBPlayer.instance.material.DOFloat(0.1f, "_dissolveAmount", 2f).SetEase(Ease.InOutQuad); // resummoning disolve
         UiManager.instance.fadingPanel.DOFade(0, 2);
         SoundLauncher.instance.PlayDissolve();
         yield return new WaitForSeconds(2);
