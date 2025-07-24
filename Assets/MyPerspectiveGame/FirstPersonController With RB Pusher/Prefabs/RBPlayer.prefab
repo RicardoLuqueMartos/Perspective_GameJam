@@ -152,7 +152,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.1
+  near clip plane: 0.01
   far clip plane: 1000
   field of view: 60
   orthographic: 0
@@ -203,7 +203,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -333,6 +333,7 @@ MonoBehaviour:
   animatorManager: {fileID: 5278992244822806507}
   correctInclination: 1
   inclinationCorrectionSpeed: 0.1
+  material: {fileID: 2100000, guid: 3765353a2e2bc554fa117a220d698e2e, type: 2}
 --- !u!143 &6003987945294412375
 CharacterController:
   m_ObjectHideFlags: 0
@@ -444,7 +445,7 @@ PrefabInstance:
     - target: {fileID: 319799319419646357, guid: bb96394e9629f20408ea23d3760ba123, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: df81ddc38bae7e945a835735059fe898, type: 2}
+      objectReference: {fileID: 2100000, guid: 3765353a2e2bc554fa117a220d698e2e, type: 2}
     - target: {fileID: 361575810401162435, guid: bb96394e9629f20408ea23d3760ba123, type: 3}
       propertyPath: m_Layer
       value: 7

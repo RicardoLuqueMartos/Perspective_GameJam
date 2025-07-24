@@ -82,18 +82,18 @@ public class Teleporter : MonoBehaviour
         SoundLauncher.instance.PlayDissolve();
         var controller = PlayerController.instance;
         if (controller != null) controller.enabled = false;
-        PlayerController.instance.material.DOFloat(1.1f, "_dissolveAmount", 2f).SetEase(Ease.InOutQuad); // Start with dissolve effect
+        RBPlayer.instance.material.DOFloat(1.1f, "_dissolveAmount", 2f).SetEase(Ease.InOutQuad); // Start with dissolve effect
         yield return new WaitForSeconds(2);
 
         // Désactivation du CharacterController avant de déplacer le joueur
 
 
-        PlayerController.instance.gameObject.transform.position = destination.position;
+        RBPlayer.instance.gameObject.transform.position = destination.position;
         GameProgressManager.instance.currentRespawnTransform = destination;
 
         // Réactivation du CharacterController après le déplacement
 
-        PlayerController.instance.material.DOFloat(0.1f, "_dissolveAmount", 2f).SetEase(Ease.InOutQuad); // resummoning disolve
+        RBPlayer.instance.material.DOFloat(0.1f, "_dissolveAmount", 2f).SetEase(Ease.InOutQuad); // resummoning disolve
         UiManager.instance.fadingPanel.DOFade(0, 2);
         SoundLauncher.instance.PlayDissolve();
         yield return new WaitForSeconds(2);
