@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering;
 using UnityEngine.UI;
-using static UnityEditorInternal.ReorderableList;
 
 [CreateAssetMenu(fileName = "GameSettingsData", menuName = "Scriptable Objects/GameSettingsData")]
 public class GameSettingsData : ScriptableObject

@@ -5,9 +5,15 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/MyPerspectiveGame/FirstPersonController With RB Pusher/DemoScene/SceneTitre.unity
+    guid: 941d06829077d6543a186170428af44a
+  - enabled: 1
+    path: Assets/MyPerspectiveGame/FirstPersonController With RB Pusher/DemoScene/DemoSceneV1.unity
+    guid: 36d7383eaa46c2a409c07338c246be52
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
